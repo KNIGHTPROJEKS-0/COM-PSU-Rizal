@@ -5,7 +5,7 @@ export function LogoMarquee() {
     <section className="container mx-auto px-4 py-10">
       <div className="flex items-center justify-center">
         <div className="text-center">
-          <p className="text-sm text-neutral-500">Trusted by teams at</p>
+          <p className="text-sm text-neutral-500">Supporting collaboration across PSU College</p>
           <div className="mt-4 flex animate-scroll-right items-center justify-center gap-12 whitespace-nowrap py-4 sm:gap-20">
             {logos.map((logo, i) => (
               <Image
@@ -37,32 +37,32 @@ export function LogoMarquee() {
 
 const logos = [
   {
-    src: "/images/logo-1.png",
-    alt: "Company 1",
+    src: "/icons/com-psu-rizal-white.svg",
+    alt: "COM-PSU-Rizal",
     width: 120,
     height: 32,
   },
   {
-    src: "/images/logo-2.png",
-    alt: "Company 2",
+    src: "/icons/com-psu-rizal-white.svg",
+    alt: "COM-PSU-Rizal",
     width: 120,
     height: 32,
   },
   {
-    src: "/images/logo-3.png",
-    alt: "Company 3",
+    src: "/icons/com-psu-rizal-white.svg",
+    alt: "COM-PSU-Rizal",
     width: 120,
     height: 32,
   },
   {
-    src: "/images/logo-4.png",
-    alt: "Company 4",
+    src: "/icons/com-psu-rizal-white.svg",
+    alt: "COM-PSU-Rizal",
     width: 120,
     height: 32,
   },
   {
-    src: "/images/logo-5.png",
-    alt: "Company 5",
+    src: "/icons/com-psu-rizal-white.svg",
+    alt: "COM-PSU-Rizal",
     width: 120,
     height: 32,
   },

@@ -83,7 +83,7 @@ export default function LazyVideo({
       muted={muted}
       playsInline={playsInline}
       aria-label={ariaLabel}
-      preload="none"
+      preload="metadata"
     >
       <source src={src} type="video/mp4" />
       Your browser does not support the video tag.

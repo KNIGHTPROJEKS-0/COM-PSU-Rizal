@@ -136,37 +136,38 @@ function PhoneCard({
 
 const phoneData = [
   {
-    title: "HD Video",
-    sub: "Crystal clear quality.",
+    title: "Collaboration",
+    sub: "Collaborative video conferencing solution built for academic communities.",
     tone: "results",
     gradient: "from-[#0b0b0b] via-[#0f172a] to-[#020617]",
-    videoSrc:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/A%20new%20chapter%20in%20the%20story%20of%20success.__Introducing%20the%20new%20TAG%20Heuer%20Carrera%20Day-Date%20collection%2C%20reimagined%20with%20bold%20colors%2C%20refined%20finishes%2C%20and%20upgraded%20functionality%20to%20keep%20you%20focused%20on%20your%20goals.%20__Six%20-nDNoRQyFaZ8oaaoty4XaQz8W8E5bqA.mp4",
+    videoSrc: "/media/collaboration.mp4",
   },
   {
-    title: "Low Latency",
-    sub: "Real-time conversations.",
+    title: "Tracking",
+    sub: "Helping students and teachers stay engaged anytime, anywhere.",
     tone: "speed",
     gradient: "from-[#0b1a0b] via-[#052e16] to-[#022c22]",
+    videoSrc: "/media/tracking.mp4",
   },
   {
     title: "Screen Share",
     sub: "Share your screen easily.",
     tone: "social",
     gradient: "from-[#001028] via-[#0b355e] to-[#052e5e]",
-    videoSrc:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Timeline%201-Ku3Y2Hgaw8hCiFEFg1ELtYp631rSzR.webm",
+    videoSrc: "/media/screen-share.mp4",
   },
   {
     title: "Group Calls",
     sub: "Connect with your team.",
     tone: "standout",
     gradient: "from-[#0b0b0b] via-[#1f2937] to-[#0b1220]",
+    videoSrc: "/media/group-calls.mp4",
   },
   {
     title: "Secure",
     sub: "End-to-end encryption.",
     tone: "premium",
     gradient: "from-[#0b0b0b] via-[#111827] to-[#052e16]",
+    videoSrc: "/media/secure.mp4",
   },
 ];

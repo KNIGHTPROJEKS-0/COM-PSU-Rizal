@@ -5,6 +5,7 @@ import { Inter } from "next/font/google"
 import Script from "next/script"
 import Plasma from "@/components/plasma"
 import { Toaster } from "@/components/ui/sonner"
+import { AuthProvider } from "@/contexts/AuthContext"
 
 const inter = Inter({ subsets: ["latin"], display: "swap" })
 
@@ -54,7 +55,11 @@ export default function RootLayout({
             mouseInteractive={true}
           />
         </div>
-        <div className="relative z-10">{children}</div>
+        <div className="relative z-10">
+          <AuthProvider>
+            {children}
+          </AuthProvider>
+        </div>
         <Toaster />
       </body>
     </html>

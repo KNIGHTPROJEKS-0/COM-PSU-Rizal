@@ -2,15 +2,16 @@ import { SiteHeader } from "@/components/site-header"
 import { Hero } from "@/components/hero"
 import { Features } from "@/components/features"
 import { LogoMarquee } from "@/components/logo-marquee"
-import { Pricing } from "@/components/pricing"
+import { Plans } from "@/components/plans"
 import { AppverseFooter } from "@/components/appverse-footer"
-import { ToastDemo } from "@/components/toast-demo"
 import Script from "next/script"
+import { createClient } from '@/utils/supabase/server'
+import { cookies } from 'next/headers'
 
 // ✅ Force static generation for low TTFB
 export const dynamic = "force-static"
 
-export default function Page() {
+export default async function Page() {
   // Structured data for pricing
   const pricingStructuredData = {
     "@context": "https://schema.org",
@@ -79,6 +80,14 @@ export default function Page() {
     ],
   }
 
+  // Supabase integration
+  const cookieStore = await cookies()
+  const supabase = createClient(cookieStore)
+
+  // For demonstration, we'll try to fetch some data
+  // Note: You'll need to adjust this based on your actual database schema
+  const { data: todos } = await supabase.from('todos').select()
+
   return (
     <>
       <main className="min-h-[100dvh] text-white">
@@ -86,10 +95,7 @@ export default function Page() {
         <Hero />
         <Features />
         <LogoMarquee />
-        <div className="container py-12">
-          <ToastDemo />
-        </div>
-        <Pricing />
+        <Plans />
         <AppverseFooter />
       </main>
 

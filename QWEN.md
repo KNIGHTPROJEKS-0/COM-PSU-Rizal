@@ -16,6 +16,22 @@ This is a real-time video conferencing web application named COM-PSU-Rizal with 
 - Academic-focused dashboard with analytics
 - Attendance tracking
 - Student and class management
+- Assignment submission and grading
+
+## Recent Improvements
+
+### UI/UX Enhancements
+- Improved text visibility on dark backgrounds in the "Start a New Meeting" page
+- Enhanced color contrast for better accessibility
+- Updated text colors for labels, titles, and descriptions
+
+### Supabase Integration
+- Added Supabase authentication for students and faculty
+- Created database schema for academic features (users, classes, enrollments, attendance, assignments, submissions, grades)
+- Implemented database services for all academic operations
+- Set up storage for assignments and backups
+- Configured Row Level Security (RLS) policies for data protection
+- Implemented SSR support with middleware for server-side rendering
 
 ## Qwen's Role
 

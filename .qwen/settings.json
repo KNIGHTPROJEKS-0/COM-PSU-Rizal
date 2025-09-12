@@ -1,0 +1,101 @@
+{
+  "mcpServers": {
+    "qwen-model-server": {
+      "command": "node",
+      "args": [
+        "/Users/ORDEROFCODE/Agents/qwen-code/mcp/qwen-model/mcp-model-server.js"
+      ],
+      "cwd": "/Users/ORDEROFCODE/Agents/qwen-code/mcp/qwen-model",
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "timeout": 30000,
+      "trust": true
+    },
+    "ai-assistant-simple": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@cpretzinger/ai-assistant-simple",
+        "--key",
+        "8367cd4b-799d-4723-abe2-99d0c1161c32",
+        "--profile",
+        "filthy-orca-dX6dH6"
+      ]
+    },
+    "postgresql-mcp-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@HenkDz/postgresql-mcp-server",
+        "--key",
+        "8367cd4b-799d-4723-abe2-99d0c1161c32"
+      ]
+    },
+    "supabase-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@supabase-community/supabase-mcp",
+        "--key",
+        "8367cd4b-799d-4723-abe2-99d0c1161c32",
+        "--profile",
+        "filthy-orca-dX6dH6"
+      ]
+    },
+    "podman": {
+      "command": "npx",
+      "args": ["-y", "podman-mcp-server@latest"]
+    },
+    "memento-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@gannonh/memento-mcp",
+        "--key",
+        "8367cd4b-799d-4723-abe2-99d0c1161c32",
+        "--profile",
+        "filthy-orca-dX6dH6"
+      ]
+    },
+    "DocFork": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@docfork/mcp",
+        "--key",
+        "8367cd4b-799d-4723-abe2-99d0c1161c32"
+      ]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/ORDEROFCODE/MCP-Servers/mcp-filesystem-server"
+      ],
+      "env": {
+        "FILESYSTEM_ALLOWED_PATHS": "/Users/ORDEROFCODE"
+      },
+      "cwd": null,
+      "timeout": 600000,
+      "trust": true
+    },
+    "byterover-mcp": {
+      "httpUrl": "https://mcp.byterover.dev/v2/mcp",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJway1ici05OGJjZGYzYy02NGI4LTRiNmUtOWE4Ny0zN2VlZDkzZDBiNjQiLCJ1c2VySWQiOiJrbmlnaHRwcm9qZWtzQGdtYWlsLmNvbSIsImlhdCI6MTc1NjAxNjM4NiwiZXhwIjoxNzYxMjAwMzg2LCJpc3MiOiJCWVRFUk9WRVIgTUNQIFNFUlZFUiJ9.Yy-qt4AcmURtOf7PS4IcqoA-RLV4oUXPOtpISy2E4IA"
+      }
+    }
+  }
+}

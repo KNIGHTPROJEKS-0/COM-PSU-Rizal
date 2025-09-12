@@ -11,7 +11,7 @@ interface FeaturesContent {
 }
 
 const defaultContent: FeaturesContent = {
-  title: "Why Choose Collaboration Online Meet for Your Academic Video Conferencing Needs",
+  title: "Why Choose Collaboration Online Meet (COM) for Smarter Learning",
   subtitle: "Discover our unique approach to seamless educational communication",
 }
 
@@ -40,18 +40,18 @@ export function Features() {
       </h2>
 
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Video Quality Card - Hidden on mobile */}
+        {/* Unique Value Card - Hidden on mobile */}
         <Card className="hidden md:block liquid-glass border border-white/10 bg-white/5 backdrop-blur-xl">
           <CardHeader>
-            <p className="text-[11px] tracking-widest text-neutral-400">VIDEO QUALITY</p>
-            <CardTitle className="mt-1 text-xl text-white">Crystal Clear HD Video Calls</CardTitle>
+            <p className="text-[11px] tracking-widest text-neutral-400">UNIQUE VALUE</p>
+            <CardTitle className="mt-1 text-xl text-white">Academic + Collaboration Focus:</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
                 <Image
-                  src="/images/video-quality-1.png"
-                  alt="High definition video call"
+                  src="/images/academic-1.png"
+                  alt="Academic focused collaboration"
                   fill
                   className="object-cover"
                   sizes="(min-width: 768px) 240px, 45vw"
@@ -60,8 +60,8 @@ export function Features() {
               </div>
               <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-white/10">
                 <Image
-                  src="/images/video-quality-2.png"
-                  alt="Multiple participants in HD"
+                  src="/images/collaboration-2.png"
+                  alt="Collaborative learning environment"
                   fill
                   className="object-cover"
                   sizes="(min-width: 768px) 240px, 45vw"
@@ -77,38 +77,38 @@ export function Features() {
           <CardHeader>
             <p className="text-[11px] tracking-widest text-neutral-400">KEY FEATURES</p>
             <CardTitle className="mt-1 text-xl text-white">
-              Everything you need for seamless communication
+              Your complete solution for online learning and communication
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="mb-6">
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
+                  <Users className="mt-0.5 h-5 w-5 text-orange-400" />
+                  <div>
+                    <h3 className="font-medium text-white">👩‍🏫 Academic-Centered Design</h3>
+                    <p className="text-sm text-neutral-400">Built with students and faculty in mind—flexible schedules, easy file sharing, and attendance tracking.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
                   <Video className="mt-0.5 h-5 w-5 text-orange-400" />
                   <div>
-                    <h3 className="font-medium text-white">High-Quality Video</h3>
-                    <p className="text-sm text-neutral-400">Experience crystal clear video calls with up to 1080p resolution</p>
+                    <h3 className="font-medium text-white">🌐 Seamless Connectivity</h3>
+                    <p className="text-sm text-neutral-400">Join or host meetings anytime, anywhere with stable, low-latency video and audio powered by WebRTC.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Monitor className="mt-0.5 h-5 w-5 text-orange-400" />
                   <div>
-                    <h3 className="font-medium text-white">Screen Sharing</h3>
-                    <p className="text-sm text-neutral-400">Share your screen with participants for presentations and collaboration</p>
+                    <h3 className="font-medium text-white">📂 Smart File Management</h3>
+                    <p className="text-sm text-neutral-400">Never lose your work—uploaded assignments and shared files are automatically backed up for easy recovery.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <MessageCircle className="mt-0.5 h-5 w-5 text-orange-400" />
                   <div>
-                    <h3 className="font-medium text-white">Real-Time Chat</h3>
-                    <p className="text-sm text-neutral-400">Send messages, files, and emojis during your meetings</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Users className="mt-0.5 h-5 w-5 text-orange-400" />
-                  <div>
-                    <h3 className="font-medium text-white">Large Meetings</h3>
-                    <p className="text-sm text-neutral-400">Host meetings with up to 100 participants</p>
+                    <h3 className="font-medium text-white">📝 Learning Tools Integration</h3>
+                    <p className="text-sm text-neutral-400">Stay on top of grades, tasks, and compliance through built-in monitoring features that keep both students and instructors updated.</p>
                   </div>
                 </li>
               </ul>

@@ -10,15 +10,15 @@ export function SiteHeader() {
   const links = [
     { href: "/", label: "Home", icon: Video },
     { href: "#features", label: "Features", icon: Monitor },
-    { href: "#pricing", label: "Pricing", icon: Users },
+    { href: "#pricing", label: "Plans", icon: Users },
     { href: "/faq", label: "FAQ", icon: MessageCircle },
     { href: "/about", label: "About", icon: Info },
   ]
 
   return (
-    <header className="sticky top-0 z-50 p-4">
-      <div className="container mx-auto max-w-4xl">
-        <div className="flex h-14 items-center justify-between px-6 liquid-glass-header rounded-full">
+    <header className="sticky top-0 z-50 px-4 py-3">
+      <div className="container mx-auto max-w-6xl">
+        <div className="flex h-14 items-center justify-between px-4 liquid-glass-header rounded-full">
           {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-2">
             <Image
@@ -35,7 +35,7 @@ export function SiteHeader() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden items-center gap-6 text-sm text-gray-300 md:flex">
+          <nav className="hidden items-center gap-4 text-sm text-gray-300 md:flex">
             {links.map((l) => (
               <Link
                 key={l.href}
@@ -48,7 +48,14 @@ export function SiteHeader() {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex">
+          <div className="hidden md:flex items-center gap-3">
+            <Button
+              asChild
+              variant="outline"
+              className="border-gray-700 bg-gray-900/80 text-gray-200 hover:bg-gray-800"
+            >
+              <Link href="/auth">Login/Signup</Link>
+            </Button>
             <Button
               asChild
               className="bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium rounded-lg px-6 py-2.5
@@ -107,8 +114,15 @@ export function SiteHeader() {
                   ))}
                 </nav>
 
-                {/* CTA Button at Bottom */}
-                <div className="mt-auto border-t border-gray-800 p-4">
+                {/* CTA Buttons at Bottom */}
+                <div className="mt-auto border-t border-gray-800 p-4 space-y-3">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full border-gray-700 bg-gray-900/80 text-gray-200 hover:bg-gray-800"
+                  >
+                    <Link href="/auth">Login/Signup</Link>
+                  </Button>
                   <Button
                     asChild
                     className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium rounded-lg px-6 py-2.5
