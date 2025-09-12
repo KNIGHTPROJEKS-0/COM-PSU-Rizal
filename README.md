@@ -15,6 +15,8 @@ A real-time video conferencing web application built with Next.js, Tailwind CSS,
 - Assignment submission and grading
 - Responsive design
 - Meeting scheduling (planned)
+- Role-based access control (Student/Faculty)
+- Server-side rendering (SSR) with Supabase
 
 ## Getting Started
 
@@ -58,7 +60,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ```
 ├── app/                 # Next.js app directory
-│   ├── auth/            # Authentication pages
+│   ├── auth/            # Authentication pages with role selection
 │   ├── dashboard/       # Academic dashboard with analytics
 │   │   ├── admin/       # Admin dashboard for faculty
 │   │   ├── student/     # Student dashboard
@@ -72,6 +74,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 │   └── globals.css      # Global styles
 ├── components/          # React components
 │   ├── auth/            # Authentication components
+│   ├── dashboard/       # Dashboard components
 │   ├── ui/              # UI components from shadcn/ui
 │   └── ...              # Custom components
 ├── contexts/            # React context providers
@@ -101,6 +104,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Performance metrics
 - Recent activity feed
 - Assignment management
+- Role-based access control (Student/Faculty dashboards)
 
 ### Meeting Management
 - Password-protected meetings
@@ -109,11 +113,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Meeting recording (planned)
 
 ### Supabase Integration
-- Authentication (students, faculty)
-- Database for attendance, grades, files
+- Authentication (students, faculty) with role-based access control
+- Database for users, classes, enrollments, attendance, assignments, submissions, and grades
 - Storage for backups/assignments
 - Real-time features
-- Server-side rendering (SSR) support
+- Server-side rendering (SSR) support with middleware
+- Row Level Security (RLS) policies for data protection
 
 ## Recent Improvements
 
@@ -121,24 +126,30 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Improved text visibility on dark backgrounds in the "Start a New Meeting" page
 - Enhanced color contrast for better accessibility
 - Updated text colors for labels, titles, and descriptions
-- New two-column authentication page with role selection
-- Role-based dashboard routing
+- Created a new two-column authentication page with role selection
+- Implemented role-specific dashboards for admin/faculty and student users
+- Added consistent dark theme with proper text visibility and color contrast
 
 ### Supabase Integration
-- Added Supabase authentication for students and faculty
-- Created database schema for academic features
+- Added Supabase authentication for students and faculty with role-based access control
+- Created comprehensive database schema for academic features (users, classes, enrollments, attendance, assignments, submissions, grades)
 - Implemented database services for all academic operations
 - Set up storage for assignments and backups
 - Configured Row Level Security (RLS) policies for data protection
 - Implemented SSR support with middleware
+- Created role-specific dashboards for admin/faculty and student users
 
-## Navigation Flow
-1. **Landing Page** (`/`) - Public homepage
-2. **Authentication Page** (`/auth`) - Two-column authentication with role selection
-3. **Dashboard Redirect** (`/dashboard`) - Redirects users based on their role
-4. **Role-based Dashboards**:
-   - Admin/Faculty Dashboard (`/dashboard/admin`)
-   - Student Dashboard (`/dashboard/student`)
+### Core Functionality Implementation
+- Role-Based Access Control: Students and faculty are redirected to appropriate dashboards
+- Academic Features: Class management, enrollment tracking, attendance monitoring, assignment submission/grading
+- UI/UX Enhancements: Consistent dark theme with proper text visibility and color contrast
+- Responsive Design: Fully responsive layout that works on all device sizes
+
+### Code Structure
+- Authentication Service: Complete implementation with sign up, sign in, sign out, and password management
+- Database Service: Full CRUD operations for all academic entities
+- Context Providers: Proper React context for authentication state management
+- Component Library: Reusable UI components following shadcn/ui patterns
 
 ## Learn More
 

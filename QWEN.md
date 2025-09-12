@@ -24,21 +24,29 @@ This is a real-time video conferencing web application named COM-PSU-Rizal with 
 - Improved text visibility on dark backgrounds in the "Start a New Meeting" page
 - Enhanced color contrast for better accessibility
 - Updated text colors for labels, titles, and descriptions
-- Created a new two-column authentication page with role selection
+- Created role-based authentication flow with Student/Faculty selection
+- Implemented consistent dark theme with proper text visibility and color contrast
 
 ### Supabase Integration
-- Added Supabase authentication for students and faculty
-- Created database schema for academic features (users, classes, enrollments, attendance, assignments, submissions, grades)
+- Added Supabase authentication for students and faculty with role-based access control
+- Created comprehensive database schema for academic features (users, classes, enrollments, attendance, assignments, submissions, grades)
 - Implemented database services for all academic operations
 - Set up storage for assignments and backups
 - Configured Row Level Security (RLS) policies for data protection
-- Implemented SSR support with middleware
+- Implemented SSR (Server-Side Rendering) support with middleware
+- Created role-specific dashboards for admin/faculty and student users
 
-### Role-Based Dashboard System
-- Created separate dashboards for admin/faculty and student roles
-- Implemented automatic role-based redirection from the main dashboard
-- Designed distinct UI layouts for each user type
-- Added appropriate navigation and functionality for each role
+### Core Functionality Implementation
+- Role-Based Access Control: Students and faculty are redirected to appropriate dashboards
+- Academic Features: Class management, enrollment tracking, attendance monitoring, assignment submission/grading
+- UI/UX Enhancements: Consistent dark theme with proper text visibility and color contrast
+- Responsive Design: Fully responsive layout that works on all device sizes
+
+### Code Structure
+- Authentication Service: Complete implementation with sign up, sign in, sign out, and password management
+- Database Service: Full CRUD operations for all academic entities
+- Context Providers: Proper React context for authentication state management
+- Component Library: Reusable UI components following shadcn/ui patterns
 
 ## Qwen's Role
 
