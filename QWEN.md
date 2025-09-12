@@ -13,6 +13,9 @@ This is a real-time video conferencing web application named COM-PSU-Rizal with 
 - Screen sharing
 - Chat functionality
 - Meeting links generation
+- Academic-focused dashboard with analytics
+- Attendance tracking
+- Student and class management
 
 ## Qwen's Role
 
@@ -35,4 +38,4 @@ When working with this project, Qwen will:
 
 ## Last Updated
 
-Friday, September 12, 2025
+Saturday, September 13, 2025

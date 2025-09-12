@@ -1,6 +1,6 @@
 # COM-PSU-Rizal
 
-A real-time video conferencing web application built with Next.js, Tailwind CSS, and WebRTC.
+A real-time video conferencing web application built with Next.js, Tailwind CSS, and WebRTC, specifically designed for academic communities.
 
 ## Features
 
@@ -8,8 +8,12 @@ A real-time video conferencing web application built with Next.js, Tailwind CSS,
 - Screen sharing
 - Real-time chat
 - Meeting link generation
+- Secure connections with password protection and waiting rooms
+- Academic dashboard with analytics
+- Attendance tracking
+- Student and class management
 - Responsive design
-- Secure connections
+- Meeting scheduling (planned)
 
 ## Getting Started
 
@@ -39,16 +43,45 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ```
 ├── app/                 # Next.js app directory
+│   ├── auth/            # Authentication pages
+│   ├── dashboard/       # Academic dashboard with analytics
 │   ├── meeting/         # Meeting pages
+│   │   ├── new/         # Create new meeting
+│   │   ├── join/        # Join existing meeting
+│   │   └── [id]/        # Meeting room
 │   ├── page.tsx         # Landing page
 │   ├── layout.tsx       # Root layout
 │   └── globals.css      # Global styles
 ├── components/          # React components
+│   ├── auth/            # Authentication components
 │   ├── ui/              # UI components from shadcn/ui
 │   └── ...              # Custom components
 ├── public/              # Static assets
 └── ...
 ```
+
+## Core Functionality
+
+### Video Conferencing
+- Start instant meetings with random meeting IDs
+- Join meetings via links
+- Toggle audio/video
+- Screen sharing capability
+- Real-time chat during meetings
+- Participant management
+
+### Academic Dashboard
+- Student enrollment tracking
+- Class management overview
+- Attendance analytics
+- Performance metrics
+- Recent activity feed
+
+### Meeting Management
+- Password-protected meetings
+- Waiting room functionality
+- Meeting scheduling (in development)
+- Meeting recording (planned)
 
 ## Learn More
 
