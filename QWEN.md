@@ -24,6 +24,7 @@ This is a real-time video conferencing web application named COM-PSU-Rizal with 
 - Improved text visibility on dark backgrounds in the "Start a New Meeting" page
 - Enhanced color contrast for better accessibility
 - Updated text colors for labels, titles, and descriptions
+- Created a new two-column authentication page with role selection
 
 ### Supabase Integration
 - Added Supabase authentication for students and faculty
@@ -31,7 +32,13 @@ This is a real-time video conferencing web application named COM-PSU-Rizal with 
 - Implemented database services for all academic operations
 - Set up storage for assignments and backups
 - Configured Row Level Security (RLS) policies for data protection
-- Implemented SSR support with middleware for server-side rendering
+- Implemented SSR support with middleware
+
+### Role-Based Dashboard System
+- Created separate dashboards for admin/faculty and student roles
+- Implemented automatic role-based redirection from the main dashboard
+- Designed distinct UI layouts for each user type
+- Added appropriate navigation and functionality for each role
 
 ## Qwen's Role
 

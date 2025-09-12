@@ -7,11 +7,23 @@ import { AppverseFooter } from "@/components/appverse-footer"
 import Script from "next/script"
 import { createClient } from '@/utils/supabase/server'
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 // ✅ Force static generation for low TTFB
 export const dynamic = "force-static"
 
 export default async function Page() {
+  // Check if user is already logged in
+  const cookieStore = await cookies()
+  const supabase = createClient(cookieStore)
+  const { data: { session } } = await supabase.auth.getSession()
+  
+  // If user is logged in, redirect to dashboard
+  if (session) {
+    // For now, we'll redirect to the auth page which will handle role-based redirection
+    redirect('/dashboard')
+  }
+
   // Structured data for pricing
   const pricingStructuredData = {
     "@context": "https://schema.org",
@@ -79,14 +91,6 @@ export default async function Page() {
       },
     ],
   }
-
-  // Supabase integration
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
-
-  // For demonstration, we'll try to fetch some data
-  // Note: You'll need to adjust this based on your actual database schema
-  const { data: todos } = await supabase.from('todos').select()
 
   return (
     <>

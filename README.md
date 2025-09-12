@@ -60,6 +60,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ├── app/                 # Next.js app directory
 │   ├── auth/            # Authentication pages
 │   ├── dashboard/       # Academic dashboard with analytics
+│   │   ├── admin/       # Admin dashboard for faculty
+│   │   ├── student/     # Student dashboard
+│   │   └── README.md    # Dashboard documentation
 │   ├── meeting/         # Meeting pages
 │   │   ├── new/         # Create new meeting
 │   │   ├── join/        # Join existing meeting
@@ -118,13 +121,24 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Improved text visibility on dark backgrounds in the "Start a New Meeting" page
 - Enhanced color contrast for better accessibility
 - Updated text colors for labels, titles, and descriptions
+- New two-column authentication page with role selection
+- Role-based dashboard routing
 
 ### Supabase Integration
 - Added Supabase authentication for students and faculty
 - Created database schema for academic features
 - Implemented database services for all academic operations
 - Set up storage for assignments and backups
-- Configured SSR support with middleware
+- Configured Row Level Security (RLS) policies for data protection
+- Implemented SSR support with middleware
+
+## Navigation Flow
+1. **Landing Page** (`/`) - Public homepage
+2. **Authentication Page** (`/auth`) - Two-column authentication with role selection
+3. **Dashboard Redirect** (`/dashboard`) - Redirects users based on their role
+4. **Role-based Dashboards**:
+   - Admin/Faculty Dashboard (`/dashboard/admin`)
+   - Student Dashboard (`/dashboard/student`)
 
 ## Learn More
 
