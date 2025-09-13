@@ -1,5 +1,21 @@
 # COM-PSU-Rizal
 
+![COM-PSU-Rizal Logo](public/icons/com-psu-rizal-white.svg)
+
+```
+  _____  ____  __  __     ____  ____  _   _ 
+ / ____|/ __ \|  \/  |   / __ \|  _ \| \ | |
+| |    | |  | | \  / |  | |  | | |_) |  \| |
+| |    | |  | | |\/| |  | |  | |  _ <| . ` |
+| |____| |__| | |  | |  | |__| | |_) | |\  |
+ \_____\____/|_|  |_|   \____/|____/|_| \_|
+                                           
+```
+
+## Landing Page
+
+![Landing Page](public/images/landing-1.png)
+
 A real-time video conferencing web application built with Next.js, Tailwind CSS, and WebRTC, specifically designed for academic communities.
 
 ## Features
@@ -145,11 +161,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - UI/UX Enhancements: Consistent dark theme with proper text visibility and color contrast
 - Responsive Design: Fully responsive layout that works on all device sizes
 
-### Code Structure
-- Authentication Service: Complete implementation with sign up, sign in, sign out, and password management
-- Database Service: Full CRUD operations for all academic entities
-- Context Providers: Proper React context for authentication state management
-- Component Library: Reusable UI components following shadcn/ui patterns
+### Performance Improvements
+- Enabled Turbopack for faster development builds and hot module replacement
+- Optimized build process with Next.js 15.2.4
 
 ## Learn More
 
