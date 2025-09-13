@@ -35,7 +35,8 @@ export default function AdminDashboard() {
       return
     }
 
-    if (user) {
+    // Allow both faculty and admin users
+    if (user && (user.role === 'faculty' || user.role === 'admin')) {
       fetchData()
     }
   }, [user, isAuthenticated, isLoading])

@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import React from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { 
   Mic, 
@@ -14,66 +14,150 @@ import {
   ScreenShareOff,
   MessageCircle,
   Users,
-  MoreHorizontal
+  Send,
+  X
 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useAuth } from "@/contexts/AuthContext"
+import { MeetingService } from "@/lib/meetingService"
+import { useWebSocket } from "@/hooks/use-websocket"
 
-export default function MeetingRoom() {
+export default function MeetingRoom({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter()
+  const { user } = useAuth()
   const [isMuted, setIsMuted] = useState(false)
   const [isVideoOff, setIsVideoOff] = useState(false)
   const [isScreenSharing, setIsScreenSharing] = useState(false)
   const [showChat, setShowChat] = useState(false)
-  const [chatMessages, setChatMessages] = useState<Array<{id: number, user: string, message: string, time: string}>>([])
   const [newMessage, setNewMessage] = useState("")
-  const [participants, setParticipants] = useState(1)
+  const [meetingTitle, setMeetingTitle] = useState("Meeting Room")
+  const [localStream, setLocalStream] = useState<MediaStream | null>(null)
+  const [remoteStreams, setRemoteStreams] = useState<Map<string, MediaStream>>(new Map())
   
   const localVideoRef = useRef<HTMLVideoElement>(null)
-  const remoteVideoRef = useRef<HTMLVideoElement>(null)
+  const remoteVideoRefs = useRef<Map<string, HTMLVideoElement>>(new Map())
 
-  // Simulate participants joining
+  // Unwrap params using React.use()
+  const { id: meetingId } = React.use(params)
+
+  // Initialize media devices
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (participants < 12) {
-        setParticipants(prev => prev + 1)
+    const initializeMedia = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: true
+        })
+        setLocalStream(stream)
+        if (localVideoRef.current) {
+          localVideoRef.current.srcObject = stream
+        }
+      } catch (error) {
+        console.error("Error accessing media devices:", error)
       }
-    }, 10000)
-    
-    return () => clearInterval(interval)
-  }, [participants])
+    }
 
-  // Simulate chat messages
-  useEffect(() => {
-    const messages = [
-      {id: 1, user: "Alex Johnson", message: "Hi everyone! Ready to start?", time: "10:00 AM"},
-      {id: 2, user: "Maria Garcia", message: "Yes, I've shared the documents in the chat", time: "10:01 AM"},
-      {id: 3, user: "David Chen", message: "Thanks Maria, I can see them", time: "10:02 AM"},
-    ]
-    
-    setChatMessages(messages)
+    initializeMedia()
+
+    return () => {
+      if (localStream) {
+        localStream.getTracks().forEach(track => track.stop())
+      }
+    }
   }, [])
 
-  const toggleMute = () => setIsMuted(!isMuted)
-  const toggleVideo = () => setIsVideoOff(!isVideoOff)
-  const toggleScreenShare = () => setIsScreenSharing(!isScreenSharing)
+  // Fetch meeting details
+  useEffect(() => {
+    const fetchMeeting = async () => {
+      const meeting = await MeetingService.getMeeting(meetingId)
+      if (meeting) {
+        setMeetingTitle(meeting.title)
+      }
+    }
+
+    fetchMeeting()
+  }, [meetingId])
+
+  // Add participant to meeting
+  useEffect(() => {
+    if (user) {
+      MeetingService.addParticipant(
+        meetingId,
+        user.email || "Anonymous",
+        false // isHost - would need to check if user is host
+      )
+    }
+  }, [user, meetingId])
+
+  const toggleMute = () => {
+    if (localStream) {
+      const audioTrack = localStream.getAudioTracks()[0]
+      if (audioTrack) {
+        audioTrack.enabled = !audioTrack.enabled
+      }
+    }
+    setIsMuted(!isMuted)
+  }
+
+  const toggleVideo = () => {
+    if (localStream) {
+      const videoTrack = localStream.getVideoTracks()[0]
+      if (videoTrack) {
+        videoTrack.enabled = !videoTrack.enabled
+      }
+    }
+    setIsVideoOff(!isVideoOff)
+  }
+
+  const toggleScreenShare = async () => {
+    try {
+      if (isScreenSharing) {
+        // Stop screen sharing
+        if (localStream) {
+          localStream.getTracks().forEach(track => track.stop())
+        }
+        // Resume camera
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: true
+        })
+        setLocalStream(stream)
+        if (localVideoRef.current) {
+          localVideoRef.current.srcObject = stream
+        }
+      } else {
+        // Start screen sharing
+        const stream = await navigator.mediaDevices.getDisplayMedia({
+          video: true
+        })
+        setLocalStream(stream)
+        if (localVideoRef.current) {
+          localVideoRef.current.srcObject = stream
+        }
+        // Handle screen share end
+        stream.getVideoTracks()[0].addEventListener('ended', () => {
+          setIsScreenSharing(false)
+        })
+      }
+      setIsScreenSharing(!isScreenSharing)
+    } catch (error) {
+      console.error("Error toggling screen share:", error)
+    }
+  }
+
   const toggleChat = () => setShowChat(!showChat)
   
   const sendMessage = () => {
     if (newMessage.trim() === "") return
-    
-    const newMsg = {
-      id: chatMessages.length + 1,
-      user: "You",
-      message: newMessage,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    }
-    
-    setChatMessages(prev => [...prev, newMsg])
+    sendWebSocketMessage(newMessage)
     setNewMessage("")
   }
 
-  const leaveMeeting = () => {
-    router.push("/")
+  const leaveMeeting = async () => {
+    if (localStream) {
+      localStream.getTracks().forEach(track => track.stop())
+    }
+    router.push("/dashboard")
   }
 
   return (
@@ -83,12 +167,12 @@ export default function MeetingRoom() {
         {/* Top Bar */}
         <div className="p-4 flex justify-between items-center bg-black/50 backdrop-blur-sm">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
-            <span className="text-sm font-medium">Meeting in progress</span>
+            <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'} animate-pulse`}></div>
+            <span className="text-sm font-medium">{meetingTitle}</span>
           </div>
           <div className="flex items-center gap-2 text-sm">
             <Users className="w-4 h-4" />
-            <span>{participants} participants</span>
+            <span>{participants.length} participants</span>
           </div>
         </div>
         
@@ -97,66 +181,56 @@ export default function MeetingRoom() {
           {/* Local Video */}
           <div className="relative rounded-lg overflow-hidden bg-gray-900">
             <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 to-amber-900/20"></div>
+            <video 
+              ref={localVideoRef}
+              autoPlay
+              muted
+              className="w-full h-full object-cover"
+            />
             <div className="absolute bottom-4 left-4 bg-black/50 rounded-full px-3 py-1 text-sm">
               You
             </div>
-            {isVideoOff ? (
+            {isVideoOff && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="bg-gray-700 rounded-full w-24 h-24 flex items-center justify-center">
                   <VideoOff className="w-12 h-12 text-gray-400" />
                 </div>
               </div>
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-gray-700 rounded-full w-24 h-24 flex items-center justify-center">
-                  <Video className="w-12 h-12 text-gray-400" />
-                </div>
-              </div>
             )}
           </div>
           
-          {/* Remote Participant 1 */}
-          <div className="relative rounded-lg overflow-hidden bg-gray-900">
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 to-amber-900/20"></div>
-            <div className="absolute bottom-4 left-4 bg-black/50 rounded-full px-3 py-1 text-sm">
-              Alex Johnson
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-gray-700 rounded-full w-24 h-24 flex items-center justify-center">
-                <Video className="w-12 h-12 text-gray-400" />
-              </div>
-            </div>
-          </div>
-          
-          {/* Remote Participant 2 */}
-          <div className="relative rounded-lg overflow-hidden bg-gray-900">
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 to-amber-900/20"></div>
-            <div className="absolute bottom-4 left-4 bg-black/50 rounded-full px-3 py-1 text-sm">
-              Maria Garcia
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-gray-700 rounded-full w-24 h-24 flex items-center justify-center">
-                <Video className="w-12 h-12 text-gray-400" />
-              </div>
-            </div>
-          </div>
-          
-          {/* Screen Share */}
-          <div className="relative rounded-lg overflow-hidden bg-gray-900 col-span-2">
-            <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 to-amber-900/20"></div>
-            <div className="absolute top-4 left-4 bg-black/50 rounded-full px-3 py-1 text-sm flex items-center gap-2">
-              <ScreenShare className="w-4 h-4" />
-              Maria is sharing screen
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="bg-gray-700 rounded-lg w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                  <Monitor className="w-8 h-8 text-gray-400" />
+          {/* Remote Participants */}
+          {participants
+            .filter(p => p.id !== user?.id)
+            .slice(0, 3)
+            .map((participant, index) => (
+              <div key={participant.id} className="relative rounded-lg overflow-hidden bg-gray-900">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 to-amber-900/20"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="bg-gray-700 rounded-full w-24 h-24 flex items-center justify-center">
+                    <Video className="w-12 h-12 text-gray-400" />
+                  </div>
                 </div>
-                <p className="text-gray-400">Presentation slides</p>
+                <div className="absolute bottom-4 left-4 bg-black/50 rounded-full px-3 py-1 text-sm">
+                  {participant.name}
+                </div>
+              </div>
+            ))}
+          
+          {/* Additional participants placeholder */}
+          {participants.length > 4 && (
+            <div className="relative rounded-lg overflow-hidden bg-gray-900 col-span-2">
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 to-amber-900/20"></div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="bg-gray-700 rounded-lg w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <Users className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <p className="text-gray-400">+{participants.length - 4} more participants</p>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
         
         {/* Controls */}
@@ -231,11 +305,13 @@ export default function MeetingRoom() {
           </div>
           
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {chatMessages.map((msg) => (
+            {chatMessages.map((msg: any) => (
               <div key={msg.id} className="text-sm">
                 <div className="flex justify-between items-center mb-1">
-                  <span className="font-medium">{msg.user}</span>
-                  <span className="text-xs text-gray-400">{msg.time}</span>
+                  <span className="font-medium">{msg.participantName || "Unknown"}</span>
+                  <span className="text-xs text-gray-400">
+                    {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </span>
                 </div>
                 <p className="text-gray-200">{msg.message}</p>
               </div>
@@ -251,7 +327,12 @@ export default function MeetingRoom() {
                 placeholder="Type a message..."
                 className="flex-1"
               />
-              <Button size="icon" onClick={sendMessage} className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700">
+              <Button 
+                size="icon" 
+                onClick={sendMessage} 
+                className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700"
+                disabled={!isConnected}
+              >
                 <Send className="w-4 h-4" />
               </Button>
             </div>
@@ -259,34 +340,5 @@ export default function MeetingRoom() {
         </div>
       )}
     </div>
-  )
-}
-
-// Icons that might be missing from imports
-function Monitor({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <rect width="20" height="12" x="2" y="3" rx="2" />
-      <line x1="8" x2="16" y1="21" y2="21" />
-      <line x1="12" x2="12" y1="17" y2="21" />
-    </svg>
-  )
-}
-
-function Send({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <line x1="22" x2="11" y1="2" y2="13" />
-      <polygon points="22 2 15 22 11 13 2 9 22 2" />
-    </svg>
-  )
-}
-
-function X({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <line x1="18" x2="6" y1="6" y2="18" />
-      <line x1="6" x2="18" y1="6" y2="18" />
-    </svg>
   )
 }

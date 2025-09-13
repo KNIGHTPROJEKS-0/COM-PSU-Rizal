@@ -29,8 +29,8 @@ export default function StudentDashboard() {
       return
     }
 
-    // Redirect faculty to admin dashboard
-    if (user && user.role === 'faculty') {
+    // Redirect faculty and admin to admin dashboard
+    if (user && (user.role === 'faculty' || user.role === 'admin')) {
       router.push('/dashboard/admin')
       return
     }

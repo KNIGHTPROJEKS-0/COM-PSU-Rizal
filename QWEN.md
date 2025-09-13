@@ -48,6 +48,10 @@ This is a real-time video conferencing web application named COM-PSU-Rizal with 
 - Context Providers: Proper React context for authentication state management
 - Component Library: Reusable UI components following shadcn/ui patterns
 
+### Performance Improvements
+- Enabled Turbopack for faster development builds and hot module replacement
+- Optimized build process with Next.js 15.2.4
+
 ## Qwen's Role
 
 Qwen is an AI programming assistant that helps with:

@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { GraduationCap, School, Mail, Eye, EyeOff, X } from "lucide-react"
 import { useAuth } from "@/contexts/AuthContext"
 import { useRouter } from "next/navigation"
+import GoogleSignInButton from "@/components/GoogleSignInButton"
 
 export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -55,8 +56,11 @@ export default function AuthPage() {
           title: "Signed in successfully!",
           description: "Welcome back to your account.",
         })
-        // Redirect to dashboard
-        router.push("/dashboard")
+        // Add a small delay to ensure AuthProvider updates
+        setTimeout(() => {
+          // Redirect to dashboard
+          router.push("/dashboard")
+        }, 500)
       }
     } catch (error) {
       toast({
@@ -121,8 +125,11 @@ export default function AuthPage() {
           title: "Account created!",
           description: "Your account has been created successfully. Please check your email for verification.",
         })
-        // Redirect to dashboard
-        router.push("/dashboard")
+        // Add a small delay to ensure AuthProvider updates
+        setTimeout(() => {
+          // Redirect to dashboard
+          router.push("/dashboard")
+        }, 500)
       }
     } catch (error) {
       toast({
@@ -417,16 +424,7 @@ export default function AuthPage() {
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
-                  <Button
-                    onClick={() => handleSocialLogin("Google")}
-                    variant="outline"
-                    className="bg-black/20 backdrop-blur-sm border border-white/10 rounded-xl h-12 hover:bg-black/30 text-white"
-                  >
-                    <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center mr-2">
-                      <div className="w-3 h-3 bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500 rounded-full"></div>
-                    </div>
-                    Google
-                  </Button>
+                  <GoogleSignInButton />
                   <Button
                     onClick={() => handleSocialLogin("Apple")}
                     variant="outline"

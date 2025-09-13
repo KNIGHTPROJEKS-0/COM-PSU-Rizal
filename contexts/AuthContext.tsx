@@ -10,6 +10,7 @@ interface AuthContextType extends AuthState {
   signOut: () => Promise<{ error: Error | null }>
   forgotPassword: (email: string) => Promise<{ error: Error | null }>
   updatePassword: (newPassword: string) => Promise<{ error: Error | null }>
+  setIsLoading: (loading: boolean) => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -21,10 +22,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isLoading: true
   })
 
+  const setIsLoading = (loading: boolean) => {
+    setAuthState(prev => ({
+      ...prev,
+      isLoading: loading
+    }))
+  }
+
   useEffect(() => {
     // Check if user is already logged in
     const checkUser = async () => {
+      console.log('Checking if user is already logged in...');
       const user = await authService.getCurrentUser()
+      console.log('Current user:', user);
       setAuthState({
         user,
         isAuthenticated: !!user,
@@ -36,20 +46,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // Listen for auth state changes
     const { data: { subscription } } = authService.supabase.auth.onAuthStateChange(
-      (_event, session) => {
+      async (_event, session) => {
+        console.log('Auth state changed:', _event, session?.user?.email);
         if (session?.user) {
           // User is signed in
+          // Get user role from database
+          const { data: userData, error } = await authService.supabase
+            .from('users')
+            .select('role')
+            .eq('id', session.user.id)
+            .single()
+
+          console.log('User data from database:', userData, error);
+
+          let role = 'student' as 'student' | 'faculty' | 'admin'
+          if (!error && userData) {
+            role = userData.role
+          } else {
+            // Fallback to user metadata if database lookup fails
+            role = (session.user.user_metadata?.role || 'student') as 'student' | 'faculty' | 'admin'
+          }
+
+          console.log('Setting user with role:', role);
+
           setAuthState({
             user: {
               id: session.user.id,
               email: session.user.email,
-              role: (session.user.user_metadata?.role || 'student') as 'student' | 'faculty' | 'admin'
+              role: role
             },
             isAuthenticated: true,
             isLoading: false
           })
         } else {
           // User is signed out
+          console.log('User signed out');
           setAuthState({
             user: null,
             isAuthenticated: false,
@@ -60,6 +91,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     )
 
     return () => {
+      console.log('Unsubscribing from auth state changes');
       subscription.unsubscribe()
     }
   }, [])
@@ -81,14 +113,43 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const signIn = async (data: { email: string; password: string }) => {
+    console.log('AuthContext: Attempting to sign in with:', data.email);
     const result = await authService.signIn(data)
+    console.log('AuthContext: Sign in result:', result);
     if (result.user) {
-      const userData = await authService.getCurrentUser()
+      // Get user role from database
+      console.log('AuthContext: Fetching user role from database for user ID:', result.user.id);
+      const { data: userData, error } = await authService.supabase
+        .from('users')
+        .select('role')
+        .eq('id', result.user.id)
+        .single()
+
+      console.log('AuthContext: User data from database:', userData, error);
+
+      let role = 'student' as 'student' | 'faculty' | 'admin'
+      if (!error && userData) {
+        role = userData.role
+      } else {
+        // Fallback to user metadata if database lookup fails
+        role = (result.user.user_metadata?.role || 'student') as 'student' | 'faculty' | 'admin'
+      }
+
+      console.log('AuthContext: Setting user role to:', role);
+
       setAuthState({
-        user: userData,
+        user: {
+          id: result.user.id,
+          email: result.user.email,
+          role: role
+        },
         isAuthenticated: true,
         isLoading: false
       })
+      
+      console.log('AuthContext: Auth state updated, user should be redirected to dashboard');
+    } else {
+      console.log('AuthContext: Sign in failed, no user returned');
     }
     return result
   }
@@ -121,7 +182,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         signIn,
         signOut,
         forgotPassword,
-        updatePassword
+        updatePassword,
+        setIsLoading
       }}
     >
       {children}

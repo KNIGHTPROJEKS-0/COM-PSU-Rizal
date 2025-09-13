@@ -25,6 +25,54 @@
         "filthy-orca-dX6dH6"
       ]
     },
+    "reference-servers": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@keygray/reference-servers",
+        "--key",
+        "8367cd4b-799d-4723-abe2-99d0c1161c32"
+      ]
+    },
+    "exa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "exa",
+        "--key",
+        "8367cd4b-799d-4723-abe2-99d0c1161c32",
+        "--profile",
+        "filthy-orca-dX6dH6"
+      ]
+    },
+    "lotus-wisdom-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@linxule/lotus-wisdom-mcp",
+        "--key",
+        "8367cd4b-799d-4723-abe2-99d0c1161c32"
+      ]
+    },
+    "mcp-neo4j-agent-memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@knowall-ai/mcp-neo4j-agent-memory",
+        "--key",
+        "8367cd4b-799d-4723-abe2-99d0c1161c32",
+        "--profile",
+        "filthy-orca-dX6dH6"
+      ]
+    },
     "postgresql-mcp-server": {
       "command": "npx",
       "args": [

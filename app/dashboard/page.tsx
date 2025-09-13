@@ -10,24 +10,33 @@ export default function DashboardPage() {
   const router = useRouter()
   const [redirecting, setRedirecting] = useState(false)
 
+  console.log('DashboardPage rendered with auth state:', { user, isAuthenticated, isLoading });
+
   useEffect(() => {
+    console.log('Dashboard useEffect triggered with auth state:', { user, isAuthenticated, isLoading });
+    
     if (!isLoading && !isAuthenticated) {
+      console.log('User not authenticated, redirecting to /auth');
       router.push('/auth')
       return
     }
 
-    if (user) {
+    if (user && !redirecting) {
+      console.log('User authenticated, redirecting to role-specific dashboard:', user.role);
       setRedirecting(true)
       // Redirect based on user role
-      if (user.role === 'faculty') {
+      if (user.role === 'faculty' || user.role === 'admin') {
+        console.log('Redirecting to /dashboard/admin');
         router.push('/dashboard/admin')
       } else {
+        console.log('Redirecting to /dashboard/student');
         router.push('/dashboard/student')
       }
     }
-  }, [user, isAuthenticated, isLoading])
+  }, [user, isAuthenticated, isLoading, redirecting, router])
 
   if (isLoading || redirecting) {
+    console.log('Showing loading state');
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
         <Loader2 className="h-8 w-8 animate-spin text-white" />
@@ -35,6 +44,7 @@ export default function DashboardPage() {
     )
   }
 
+  console.log('Showing dashboard redirect message');
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
       <div className="text-center">
