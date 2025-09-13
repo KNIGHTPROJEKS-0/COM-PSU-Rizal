@@ -1,4 +1,142 @@
-import { supabase } from '@/lib/supabaseClient'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import { createBrowserClient, createServerClient } from '@supabase/ssr'
+import { cookies } from 'next/headers'
+
+// Environment configuration
+const isProduction = process.env.NODE_ENV === 'production'
+const useLocalSupabase = process.env.USE_LOCAL_SUPABASE === 'true'
+
+// Cloud Supabase configuration
+const cloudUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+const cloudAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+const cloudServiceKey = process.env.SUPABASE_SERVICE_KEY || ''
+
+// Local Supabase configuration
+const localUrl = process.env.SUPABASE_URL || 'http://localhost:55521'
+const localAnonKey = process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0'
+const localServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImV4cCI6MTk4MzgxMjk5Nn0.EGIM96RAZx35lJzdJsyH-qQwv8Hdp7fsn3W0YpN81IU'
+
+// Determine which configuration to use
+const getSupabaseConfig = () => {
+  // In production, always use cloud
+  if (isProduction) {
+    return {
+      url: cloudUrl,
+      anonKey: cloudAnonKey,
+      serviceKey: cloudServiceKey,
+      isLocal: false
+    }
+  }
+  
+  // In development, check if local is preferred and available
+  if (useLocalSupabase) {
+    return {
+      url: localUrl,
+      anonKey: localAnonKey,
+      serviceKey: localServiceKey,
+      isLocal: true
+    }
+  }
+  
+  // Default to cloud in development
+  return {
+    url: cloudUrl,
+    anonKey: cloudAnonKey,
+    serviceKey: cloudServiceKey,
+    isLocal: false
+  }
+}
+
+const config = getSupabaseConfig()
+
+// Validate configuration
+if (!config.url || !config.anonKey) {
+  console.error('Supabase configuration is incomplete:', {
+    url: !!config.url,
+    anonKey: !!config.anonKey,
+    isLocal: config.isLocal,
+    environment: process.env.NODE_ENV
+  })
+  throw new Error('Missing Supabase configuration. Please check your environment variables.')
+}
+
+// Create the main supabase client
+const supabase = createBrowserClient(config.url, config.anonKey)
+
+// Export additional client creation functions
+export const createBrowserSupabaseClient = () => {
+  return createBrowserClient(config.url, config.anonKey)
+}
+
+export const createServerSupabaseClient = async () => {
+  const cookieStore = await cookies()
+  return createServerClient(config.url, config.anonKey, {
+    cookies: {
+      getAll() {
+        return cookieStore.getAll()
+      },
+      setAll(cookiesToSet) {
+        try {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            cookieStore.set(name, value, options)
+          })
+        } catch {
+          // The `setAll` method was called from a Server Component.
+          // This can be ignored if you have middleware refreshing user sessions.
+        }
+      },
+    },
+  })
+}
+
+export const createServiceSupabaseClient = () => {
+  if (!config.serviceKey) {
+    throw new Error('Service role key is required for admin operations')
+  }
+  return createClient(config.url, config.serviceKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  })
+}
+
+// Configuration info for debugging
+export const getSupabaseInfo = () => ({
+  isLocal: config.isLocal,
+  url: config.url,
+  environment: process.env.NODE_ENV,
+  useLocalSupabase: useLocalSupabase
+})
+
+// Health check function
+export const checkSupabaseConnection = async (): Promise<{
+  connected: boolean
+  error?: string
+  info: ReturnType<typeof getSupabaseInfo>
+}> => {
+  try {
+    const { data, error } = await supabase.from('users').select('id').limit(1)
+    
+    if (error && error.code !== 'PGRST116') { // PGRST116 is "relation does not exist" which is expected
+      throw error
+    }
+    
+    return {
+      connected: true,
+      info: getSupabaseInfo()
+    }
+  } catch (error) {
+    return {
+      connected: false,
+      error: error instanceof Error ? error.message : 'Unknown error',
+      info: getSupabaseInfo()
+    }
+  }
+}
+
+// Export types for TypeScript
+export type { SupabaseClient }
 
 // User operations
 export const getUserProfile = async (userId: string) => {

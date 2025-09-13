@@ -109,73 +109,12 @@ const menuData: MenuSection[] = [
         href: "/dashboard/admin",
         icon: Home,
         badge: "3",
-        children: [
-          {
-            id: "analytics",
-            label: "Analytics",
-            href: "/dashboard/admin/analytics",
-            icon: BarChart2,
-          },
-          {
-            id: "reports",
-            label: "Reports",
-            href: "/dashboard/admin/reports",
-            icon: FileText,
-            children: [
-              {
-                id: "student-reports",
-                label: "Student Reports",
-                href: "/dashboard/admin/reports/students",
-                icon: TrendingUp,
-              },
-              {
-                id: "faculty-reports",
-                label: "Faculty Reports",
-                href: "/dashboard/admin/reports/faculty",
-                icon: Users2,
-              },
-              {
-                id: "academic-reports",
-                label: "Academic Reports",
-                href: "/dashboard/admin/reports/academic",
-                icon: DollarSign,
-              },
-            ],
-          },
-          {
-            id: "real-time",
-            label: "Real-time",
-            href: "/dashboard/admin/realtime",
-            icon: Activity,
-            isNew: true,
-          },
-        ],
       },
       {
         id: "analytics",
         label: "Analytics",
         href: "/dashboard/admin/analytics",
         icon: BarChart2,
-        children: [
-          {
-            id: "overview",
-            label: "Overview",
-            href: "/dashboard/admin/analytics/overview",
-            icon: PieChart,
-          },
-          {
-            id: "performance",
-            label: "Performance",
-            href: "/dashboard/admin/analytics/performance",
-            icon: TrendingUp,
-          },
-          {
-            id: "engagement",
-            label: "Engagement",
-            href: "/dashboard/admin/analytics/engagement",
-            icon: Target,
-          },
-        ],
       },
       {
         id: "organization",
@@ -201,26 +140,6 @@ const menuData: MenuSection[] = [
         label: "Classes",
         href: "/dashboard/admin/classes",
         icon: BookOpen,
-        children: [
-          {
-            id: "all-classes",
-            label: "All Classes",
-            href: "/dashboard/admin/classes/all",
-            icon: BookOpen,
-          },
-          {
-            id: "active-classes",
-            label: "Active Classes",
-            href: "/dashboard/admin/classes/active",
-            icon: BookOpen,
-          },
-          {
-            id: "schedules",
-            label: "Schedules",
-            href: "/dashboard/admin/classes/schedules",
-            icon: Calendar,
-          },
-        ],
       },
       {
         id: "students",
@@ -228,52 +147,12 @@ const menuData: MenuSection[] = [
         href: "/dashboard/admin/students",
         icon: GraduationCap,
         badge: "5",
-        children: [
-          {
-            id: "all-students",
-            label: "All Students",
-            href: "/dashboard/admin/students/all",
-            icon: GraduationCap,
-          },
-          {
-            id: "enrolled",
-            label: "Enrolled",
-            href: "/dashboard/admin/students/enrolled",
-            icon: Check,
-          },
-          {
-            id: "graduated",
-            label: "Graduated",
-            href: "/dashboard/admin/students/graduated",
-            icon: Award,
-          },
-        ],
       },
       {
         id: "faculty",
         label: "Faculty",
         href: "/dashboard/admin/faculty",
         icon: Users2,
-        children: [
-          {
-            id: "all-faculty",
-            label: "All Faculty",
-            href: "/dashboard/admin/faculty/all",
-            icon: Users2,
-          },
-          {
-            id: "departments",
-            label: "Departments",
-            href: "/dashboard/admin/faculty/departments",
-            icon: Building2,
-          },
-          {
-            id: "schedules",
-            label: "Schedules",
-            href: "/dashboard/admin/faculty/schedules",
-            icon: Calendar,
-          },
-        ],
       },
     ],
   },
@@ -284,80 +163,20 @@ const menuData: MenuSection[] = [
       {
         id: "documents",
         label: "Documents",
-        href: "/dashboard/documents",
+        href: "/dashboard/admin/documents",
         icon: FileText,
-        children: [
-          {
-            id: "all-documents",
-            label: "All Documents",
-            href: "/dashboard/documents",
-            icon: FileText,
-          },
-          {
-            id: "shared",
-            label: "Shared",
-            href: "/dashboard/documents/shared",
-            icon: Globe,
-          },
-          {
-            id: "private",
-            label: "Private",
-            href: "/dashboard/documents/private",
-            icon: Lock,
-          },
-        ],
       },
       {
         id: "social",
         label: "Social Media",
-        href: "/dashboard/social",
+        href: "/dashboard/admin/social",
         icon: MessageSquare,
-        children: [
-          {
-            id: "posts",
-            label: "Posts",
-            href: "/dashboard/social/posts",
-            icon: MessageSquare,
-          },
-          {
-            id: "engagement",
-            label: "Engagement",
-            href: "/dashboard/social/engagement",
-            icon: TrendingUp,
-          },
-          {
-            id: "analytics",
-            label: "Analytics",
-            href: "/dashboard/social/analytics",
-            icon: BarChart3,
-          },
-        ],
       },
       {
         id: "media",
         label: "Media",
         href: "/dashboard/admin/media",
         icon: ImageIcon,
-        children: [
-          {
-            id: "images",
-            label: "Images",
-            href: "/dashboard/admin/media/images",
-            icon: ImageIcon,
-          },
-          {
-            id: "videos",
-            label: "Videos",
-            href: "/dashboard/admin/media/videos",
-            icon: Play,
-          },
-          {
-            id: "audio",
-            label: "Audio",
-            href: "/dashboard/admin/media/audio",
-            icon: Headphones,
-          },
-        ],
       },
     ],
   },
@@ -368,28 +187,8 @@ const menuData: MenuSection[] = [
       {
         id: "meetings",
         label: "Meetings",
-        href: "/meeting",
+        href: "/dashboard/admin/meetings",
         icon: Video,
-        children: [
-          {
-            id: "scheduled",
-            label: "Scheduled",
-            href: "/meeting/scheduled",
-            icon: Calendar,
-          },
-          {
-            id: "recordings",
-            label: "Recordings",
-            href: "/meeting/recordings",
-            icon: Camera,
-          },
-          {
-            id: "rooms",
-            label: "Meeting Rooms",
-            href: "/meeting/rooms",
-            icon: Monitor,
-          },
-        ],
       },
       {
         id: "notifications",
@@ -415,46 +214,18 @@ const menuData: MenuSection[] = [
         label: "Settings",
         href: "/dashboard/admin/settings",
         icon: Settings,
-        children: [
-          {
-            id: "general",
-            label: "General",
-            href: "/dashboard/admin/settings/general",
-            icon: Settings,
-          },
-          {
-            id: "security",
-            label: "Security",
-            href: "/dashboard/admin/settings/security",
-            icon: Shield,
-          },
-          {
-            id: "notifications",
-            label: "Notifications",
-            href: "/dashboard/admin/settings/notifications",
-            icon: Bell,
-          },
-        ],
       },
       {
         id: "backup",
         label: "Backup & Restore",
         href: "/dashboard/admin/backup",
         icon: Database,
-        children: [
-          {
-            id: "create-backup",
-            label: "Create Backup",
-            href: "/dashboard/admin/backup/create",
-            icon: Download,
-          },
-          {
-            id: "restore",
-            label: "Restore",
-            href: "/dashboard/admin/backup/restore",
-            icon: Upload,
-          },
-        ],
+      },
+      {
+        id: "help",
+        label: "Help",
+        href: "/dashboard/admin/help",
+        icon: HelpCircle,
       },
     ],
   },
@@ -718,8 +489,8 @@ export default function AdminSidebar() {
   return (
     <nav
       className={`
-        fixed inset-y-0 left-0 z-[60] bg-white dark:bg-[#0F0F12] 
-        border-r border-gray-200 dark:border-[#1F1F23] transition-all duration-300 ease-in-out
+        fixed inset-y-0 left-0 z-[60] bg-white dark:bg-[#0F0F12] bg-opacity-90 dark:bg-opacity-90
+        border-r border-gray-200 dark:border-[#1F1F23] transition-all duration-300 ease-in-out shadow-lg
         ${menuState === "hidden" ? "w-0 border-r-0" : getSidebarWidth()}
       `}
       onMouseEnter={() => setIsHovered(true)}

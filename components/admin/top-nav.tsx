@@ -42,7 +42,7 @@ export default function AdminTopNav() {
 
   return (
     <div className="flex items-center justify-between h-full px-4 lg:px-6">
-      {/* Left side - Menu toggle and Breadcrumbs */}
+      {/* Left side - Menu toggle, Logo and Breadcrumbs */}
       <div className="flex items-center space-x-4">
         {/* Desktop Menu Toggle */}
         <Button variant="ghost" size="sm" onClick={handleMenuToggle} className="hidden lg:flex p-2" title="Toggle Menu">
@@ -59,6 +59,17 @@ export default function AdminTopNav() {
         >
           <Menu className="h-4 w-4" />
         </Button>
+        
+        {/* COM Logo and Title */}
+        <Link href="/dashboard/admin" className="flex items-center mr-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-orange-500 h-6 w-6">
+            <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+          </svg>
+          <div className="flex flex-col ml-2">
+            <span className="font-semibold tracking-wide text-gray-900 dark:text-white text-sm">COM: Admin</span>
+            <span className="text-xs text-orange-500 tracking-widest">COM|PSU|Rizal</span>
+          </div>
+        </Link>
 
         {/* Breadcrumbs */}
         <nav className="hidden sm:flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-300">

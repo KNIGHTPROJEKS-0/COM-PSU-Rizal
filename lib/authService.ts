@@ -5,6 +5,7 @@ export interface AuthUser {
   id: string
   email: string | undefined
   role: 'student' | 'faculty' | 'admin'
+  verificationStatus?: 'pending' | 'verified' | 'rejected'
 }
 
 export interface AuthState {
@@ -77,6 +78,25 @@ class AuthService {
           // If we can't create the user record, sign out the user
           await supabase.auth.signOut()
           return { user: null, error: insertError }
+        }
+        
+        // If the user is a student, create a verification record
+        if (data.role === 'student') {
+          const { error: verificationError } = await supabase
+            .from('student_verification')
+            .insert([
+              {
+                student_id: authData.user.id,
+                status: 'pending',
+                submitted_at: new Date().toISOString(),
+                notes: 'Awaiting document submission and verification'
+              }
+            ])
+
+          if (verificationError) {
+            console.error('Error creating verification record:', verificationError)
+            // We don't need to sign out the user if this fails, as the user account is still valid
+          }
         }
       }
 
@@ -154,11 +174,25 @@ class AuthService {
       if (error) {
         return null
       }
-
+      
+      // Create the user object
       this.currentUser = {
         id: user.id,
         email: user.email,
         role: userData.role as 'student' | 'faculty' | 'admin'
+      }
+      
+      // If the user is a student, fetch their verification status
+      if (userData.role === 'student') {
+        const { data: verificationData, error: verificationError } = await supabase
+          .from('student_verification')
+          .select('status')
+          .eq('student_id', user.id)
+          .single()
+          
+        if (!verificationError && verificationData) {
+          this.currentUser.verificationStatus = verificationData.status as 'pending' | 'verified' | 'rejected'
+        }
       }
 
       return this.currentUser

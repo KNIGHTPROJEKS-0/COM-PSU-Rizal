@@ -3,12 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack -p 3000",
     "dev:collab": "node server/index.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "create-test-users": "ts-node --project tsconfig.json scripts/create-test-users.ts"
+  "typecheck": "tsc -p tsconfig.json --noEmit",
+  "mobile": "npm --prefix apps/mobile run start",
+  "mobile:ios": "npm --prefix apps/mobile run ios",
+  "mobile:android": "npm --prefix apps/mobile run android",
+    "create-test-users": "ts-node --project tsconfig.json scripts/create-test-users.ts",
+    "test:supabase": "tsx scripts/test-supabase-config.ts",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "supabase:status": "supabase status",
+    "supabase:reset": "supabase db reset"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "latest",

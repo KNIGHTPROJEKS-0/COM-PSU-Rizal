@@ -1,3 +1,5 @@
+// Re-export from TSX implementation to avoid JSX parse issues in .ts files
+export * from './components.tsx';
 import React, { 
   useState, 
   useEffect, 

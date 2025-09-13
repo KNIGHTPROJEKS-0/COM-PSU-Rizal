@@ -100,13 +100,23 @@ export default async function Page() {
 
   return (
     <>
-      <main className="min-h-[100dvh] text-white">
+      <main className="min-h-[100dvh] text-white page-transition">
         <SiteHeader />
-        <Hero />
-        <Features />
-        <LogoMarquee />
-        <Plans />
-        <AppverseFooter />
+        <div className="page-transition-fast">
+          <Hero />
+        </div>
+        <div className="page-transition-slide-right">
+          <Features />
+        </div>
+        <div className="page-transition-slide-left">
+          <LogoMarquee />
+        </div>
+        <div className="page-transition-scale">
+          <Plans />
+        </div>
+        <div className="page-transition-fast">
+          <AppverseFooter />
+        </div>
       </main>
 
       {/* JSON-LD structured data */}

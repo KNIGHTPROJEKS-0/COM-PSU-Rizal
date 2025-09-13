@@ -18,9 +18,9 @@ export default function AdminDashboardContent() {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-            Welcome to the COM-PSU-Rizal administrative dashboard. Manage classes, students, and academic content.
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white drop-shadow-md">COM: Admin Dashboard</h1>
+          <p className="text-sm text-gray-800 dark:text-gray-200 mt-1 font-medium drop-shadow">
+            Welcome to the COM administrative dashboard. Manage classes, students, and academic content.
           </p>
         </div>
         <div className="flex gap-2">
@@ -48,66 +48,66 @@ export default function AdminDashboardContent() {
       {/* Quick Access Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <Card 
-          className="bg-white dark:bg-[#0F0F12] border-gray-200 dark:border-[#1F1F23] hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white dark:bg-[#0F0F12] bg-opacity-95 dark:bg-opacity-95 border-gray-200 dark:border-[#1F1F23] hover:shadow-md transition-shadow cursor-pointer shadow-lg"
           onClick={() => router.push('/dashboard/social')}
         >
           <CardHeader className="pb-3">
-            <CardTitle className="flex items-center text-white text-lg">
-              <MessageSquare className="h-5 w-5 mr-2 text-purple-400" />
+            <CardTitle className="flex items-center text-gray-900 dark:text-white text-lg font-bold drop-shadow-sm">
+              <MessageSquare className="h-5 w-5 mr-2 text-purple-600" />
               Social Media
             </CardTitle>
-            <CardDescription className="text-gray-300">Connect with students and share updates</CardDescription>
+            <CardDescription className="text-gray-800 dark:text-gray-200">Connect with students and share updates</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-gray-400">Access the integrated social media platform to engage with the academic community.</p>
+            <p className="text-sm text-gray-800 dark:text-gray-200 drop-shadow-sm">Access the integrated social media platform to engage with the academic community.</p>
           </CardContent>
         </Card>
         
         <Card 
-          className="bg-white dark:bg-[#0F0F12] border-gray-200 dark:border-[#1F1F23] hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white dark:bg-[#0F0F12] bg-opacity-90 dark:bg-opacity-90 border-gray-200 dark:border-[#1F1F23] hover:shadow-md transition-shadow cursor-pointer shadow-lg"
           onClick={() => router.push('/dashboard/documents')}
         >
           <CardHeader className="pb-3">
-            <CardTitle className="flex items-center text-white text-lg">
-              <FileText className="h-5 w-5 mr-2 text-blue-400" />
+            <CardTitle className="flex items-center text-gray-900 dark:text-white text-lg font-bold drop-shadow-sm">
+              <FileText className="h-5 w-5 mr-2 text-blue-600" />
               Documents
             </CardTitle>
-            <CardDescription className="text-gray-300">Manage and share academic documents</CardDescription>
+            <CardDescription className="text-gray-800 dark:text-gray-200">Manage and share academic documents</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-gray-400">Upload, organize, and collaborate on documents with students and faculty.</p>
+            <p className="text-sm text-gray-800 dark:text-gray-200 drop-shadow-sm">Upload, organize, and collaborate on documents with students and faculty.</p>
           </CardContent>
         </Card>
 
         <Card 
-          className="bg-white dark:bg-[#0F0F12] border-gray-200 dark:border-[#1F1F23] hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white dark:bg-[#0F0F12] bg-opacity-90 dark:bg-opacity-90 border-gray-200 dark:border-[#1F1F23] hover:shadow-md transition-shadow cursor-pointer shadow-lg"
           onClick={() => router.push('/meeting')}
         >
           <CardHeader className="pb-3">
-            <CardTitle className="flex items-center text-white text-lg">
-              <Video className="h-5 w-5 mr-2 text-green-400" />
+            <CardTitle className="flex items-center text-gray-900 dark:text-white text-lg font-bold drop-shadow-sm">
+              <Video className="h-5 w-5 mr-2 text-green-600" />
               Meetings
             </CardTitle>
-            <CardDescription className="text-gray-300">Schedule and manage virtual meetings</CardDescription>
+            <CardDescription className="text-gray-800 dark:text-gray-200">Schedule and manage virtual meetings</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-gray-400">Create and join virtual meetings with students and faculty members.</p>
+            <p className="text-sm text-gray-800 dark:text-gray-200 drop-shadow-sm">Create and join virtual meetings with students and faculty members.</p>
           </CardContent>
         </Card>
 
         <Card 
-          className="bg-white dark:bg-[#0F0F12] border-gray-200 dark:border-[#1F1F23] hover:shadow-md transition-shadow cursor-pointer"
+          className="bg-white dark:bg-[#0F0F12] bg-opacity-90 dark:bg-opacity-90 border-gray-200 dark:border-[#1F1F23] hover:shadow-md transition-shadow cursor-pointer shadow-lg"
           onClick={() => router.push('/dashboard/admin/students')}
         >
           <CardHeader className="pb-3">
-            <CardTitle className="flex items-center text-white text-lg">
-              <Users className="h-5 w-5 mr-2 text-yellow-400" />
+            <CardTitle className="flex items-center text-gray-900 dark:text-white text-lg font-bold drop-shadow-sm">
+              <Users className="h-5 w-5 mr-2 text-yellow-600" />
               Students
             </CardTitle>
-            <CardDescription className="text-gray-300">Manage student enrollment and records</CardDescription>
+            <CardDescription className="text-gray-800 dark:text-gray-200">Manage student enrollment and records</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-gray-400">View and manage student information, enrollment status, and academic records.</p>
+            <p className="text-sm text-gray-800 dark:text-gray-200 drop-shadow-sm">View and manage student information, enrollment status, and academic records.</p>
           </CardContent>
         </Card>
       </div>

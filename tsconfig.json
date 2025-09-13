@@ -20,6 +20,33 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@app/*": [
+        "app/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@contexts/*": [
+        "contexts/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@integrations/*": [
+        "integrations/*"
+      ],
+      "@lib/*": [
+        "lib/*"
+      ],
+      "@server/*": [
+        "server/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@public/*": [
+        "public/*"
       ]
     },
     "plugins": [

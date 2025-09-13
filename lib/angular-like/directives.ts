@@ -1,3 +1,5 @@
+// Re-export from TSX implementation to avoid JSX parse issues in .ts files
+export * from './directives.tsx';
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 

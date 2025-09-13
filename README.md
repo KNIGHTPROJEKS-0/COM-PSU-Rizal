@@ -204,6 +204,7 @@ The application integrates with the external LiveMeet project for video conferen
 ### Pipeline Stages
 
 The Jenkins pipeline includes the following stages:
+
 1. Checkout - Gets the source code
 2. Environment Setup - Verifies Node.js and npm versions
 3. Install Dependencies - Installs npm dependencies using `npm ci`
@@ -214,6 +215,7 @@ The Jenkins pipeline includes the following stages:
 ### Environment Variables
 
 The pipeline is configured to accept the following parameters:
+
 - NEXT_PUBLIC_SUPABASE_URL
 - NEXT_PUBLIC_SUPABASE_ANON_KEY
 
@@ -259,6 +261,7 @@ curl -X POST 'http://localhost:8080/createItem?name=com-psu-rizal' \
 ```
 
 To base64 encode your credentials:
+
 ```bash
 echo -n 'admin:YOUR_API_TOKEN' | base64
 ```
@@ -532,6 +535,7 @@ npx tsx scripts/create-test-users.ts
 ```
 
 This will create the following users:
+
 - Admin: admin@com-psu-rizal.com / admin123
 - User 1: user1@com-psu-rizal.com / user123
 - User 2: user2@com-psu-rizal.com / user456
@@ -555,6 +559,7 @@ npm run dev:collab
 ```
 
 This will start:
+
 1. The Next.js development server on port 3000
 2. The LiveMeet collaboration server on port 5000
 
@@ -896,6 +901,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ### Architecture Overview
 
 The collaboration features are implemented using:
+
 - **Next.js** for the main application frontend
 - **LiveMeet** (external) for WebRTC video conferencing
 - **Supabase** for user authentication and data storage
@@ -904,6 +910,7 @@ The collaboration features are implemented using:
 ### API Integration
 
 The application integrates with the LiveMeet WebSocket server for real-time features:
+
 - Participant tracking
 - Chat messaging
 - WebRTC signaling (in the full implementation)

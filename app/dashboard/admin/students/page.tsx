@@ -13,9 +13,11 @@ import {
   Calendar,
   UserCheck,
   UserX,
-  MessageSquare
+  MessageSquare,
+  ShieldCheck,
+  FileCheck
 } from 'lucide-react'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Clock, XCircle } from 'lucide-react'
 
 export default function StudentManagementPage() {
   const { user, isAuthenticated, isLoading, signOut } = useAuth()
@@ -23,6 +25,7 @@ export default function StudentManagementPage() {
   const [students, setStudents] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
+  const [verificationStatus, setVerificationStatus] = useState<Record<string, string>>({})
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -57,6 +60,15 @@ export default function StudentManagementPage() {
       ]
       
       setStudents(mockStudents)
+      
+      // Mock verification statuses - in a real implementation, fetch from student_verification table
+      setVerificationStatus({
+        '1': 'verified',
+        '2': 'pending',
+        '3': 'rejected',
+        '4': 'verified',
+        '5': 'pending'
+      })
     } catch (error) {
       console.error('Error fetching student data:', error)
     } finally {
@@ -221,6 +233,14 @@ export default function StudentManagementPage() {
               />
             </div>
             <div className="flex space-x-3">
+              <Button 
+                variant="outline" 
+                className="border-gray-700 text-white hover:bg-gray-800 flex items-center"
+                onClick={() => router.push('/dashboard/admin/students/verification')}
+              >
+                <ShieldCheck className="h-4 w-4 mr-2" />
+                Verification Requests
+              </Button>
               <Button variant="outline" className="border-gray-700 text-white hover:bg-gray-800">
                 Export Data
               </Button>
@@ -243,23 +263,26 @@ export default function StudentManagementPage() {
                 <thead>
                   <tr>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Student
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Contact
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Enrollment
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Classes
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Actions
-                    </th>
+                    Student
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Contact
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Enrollment
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Status
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Verification
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Classes
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-300 uppercase tracking-wider">
+                    Actions
+                  </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-700">
@@ -304,6 +327,24 @@ export default function StudentManagementPage() {
                         }`}>
                           {student.status}
                         </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm">
+                        {verificationStatus[student.id] && (
+                          <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                            verificationStatus[student.id] === 'verified' 
+                              ? 'bg-blue-900/50 text-blue-400' 
+                              : verificationStatus[student.id] === 'pending'
+                                ? 'bg-yellow-900/50 text-yellow-400'
+                                : 'bg-red-900/50 text-red-400'
+                          }`}>
+                            <span className="flex items-center">
+                              {verificationStatus[student.id] === 'verified' && <ShieldCheck className="h-3 w-3 mr-1" />}
+                              {verificationStatus[student.id] === 'pending' && <Clock className="h-3 w-3 mr-1" />}
+                              {verificationStatus[student.id] === 'rejected' && <XCircle className="h-3 w-3 mr-1" />}
+                              {verificationStatus[student.id]}
+                            </span>
+                          </span>
+                        )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                         {student.classes} classes

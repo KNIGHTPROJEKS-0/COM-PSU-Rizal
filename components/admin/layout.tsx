@@ -69,18 +69,32 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   }
 
   return (
-    <div className={`flex h-screen ${theme === "dark" ? "dark" : ""}`}>
+    <div className={`flex h-screen ${theme === "dark" ? "dark" : ""} relative`}>
+      {/* Background image with overlay */}
+      <div 
+        className="absolute inset-0 z-0 opacity-40" 
+        style={{
+          backgroundImage: "url('/images/com-background-3.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundAttachment: "fixed",
+        }}
+      />
+      {/* Dark overlay for better text contrast */}
+      <div className="absolute inset-0 z-0 bg-black bg-opacity-60" />
+      
       <AdminSidebar />
       <div
-        className="w-full flex flex-1 flex-col transition-all duration-300 ease-in-out min-w-0"
+        className="w-full flex flex-1 flex-col transition-all duration-300 ease-in-out min-w-0 z-10 relative"
         style={{
           marginLeft: getMarginLeft(),
         }}
       >
-        <header className="h-16 border-b border-gray-200 dark:border-[#1F1F23] flex-shrink-0">
+        <header className="h-16 border-b border-gray-200 dark:border-[#1F1F23] flex-shrink-0 bg-white bg-opacity-90 dark:bg-[#0F0F12] dark:bg-opacity-90">
           <AdminTopNav />
         </header>
-        <main className="flex-1 overflow-auto p-3 sm:p-6 bg-white dark:bg-[#0F0F12] min-w-0">{children}</main>
+        <main className="flex-1 overflow-auto p-3 sm:p-6 bg-white bg-opacity-80 dark:bg-[#0F0F12] dark:bg-opacity-80 min-w-0">{children}</main>
       </div>
     </div>
   )

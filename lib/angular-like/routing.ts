@@ -1,3 +1,5 @@
+// Re-export from TSX implementation to avoid JSX parse issues in .ts files
+export * from './routing.tsx';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState, useMemo } from 'react';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';

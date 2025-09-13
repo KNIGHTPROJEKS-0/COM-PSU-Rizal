@@ -3,9 +3,10 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Script from "next/script"
-import Plasma from "@/components/plasma"
+
 import { Toaster } from "@/components/ui/sonner"
 import { AuthProvider } from "@/contexts/AuthContext"
+import { PageTransition } from "@/components/page-transition"
 
 const inter = Inter({ subsets: ["latin"], display: "swap" })
 
@@ -45,19 +46,24 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <div className="fixed inset-0 z-0 bg-black">
-          <Plasma
-            color="#8b5cf6"
-            speed={0.8}
-            direction="forward"
-            scale={1.5}
-            opacity={0.4}
-            mouseInteractive={true}
-          />
+        <div 
+          className="fixed inset-0 z-0"
+          style={{
+            backgroundImage: "url('/images/com-background-3.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed"
+          }}
+        >
+          {/* Optional overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/30" />
         </div>
         <div className="relative z-10">
           <AuthProvider>
-            {children}
+            <PageTransition>
+              {children}
+            </PageTransition>
           </AuthProvider>
         </div>
         <Toaster />

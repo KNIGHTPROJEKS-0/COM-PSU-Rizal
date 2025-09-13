@@ -1,9 +1,11 @@
 # COM-PSU-Rizal User Setup and Verification Guide
 
 ## Overview
+
 This guide explains how to set up test users with correct roles for the COM-PSU-Rizal application and verify that role-based routing works correctly.
 
 ## Prerequisites
+
 1. Supabase project set up with the correct schema
 2. Environment variables configured in `.env.local`
 3. Application built and running (`npm run dev`)
@@ -14,9 +16,9 @@ First, ensure your Supabase database has the correct schema by running the migra
 
 ```sql
 -- Check if the users table exists with correct structure
-SELECT column_name, data_type, is_nullable 
-FROM information_schema.columns 
-WHERE table_name = 'users' 
+SELECT column_name, data_type, is_nullable
+FROM information_schema.columns
+WHERE table_name = 'users'
 AND column_name IN ('id', 'email', 'first_name', 'last_name', 'role')
 ORDER BY ordinal_position;
 ```
@@ -28,13 +30,13 @@ Run the following SQL in your Supabase SQL Editor:
 ```sql
 -- Insert or update test users with correct roles
 INSERT INTO users (id, email, first_name, last_name, role, created_at)
-VALUES 
+VALUES
   (gen_random_uuid(), 'admin@com-psu-rizal.com', 'Admin', 'User', 'admin', NOW()),
   (gen_random_uuid(), 'user1@com-psu-rizal.com', 'User', 'One', 'student', NOW()),
   (gen_random_uuid(), 'user2@com-psu-rizal.com', 'User', 'Two', 'student', NOW())
-ON CONFLICT (email) 
-DO UPDATE SET 
-  role = EXCLUDED.role, 
+ON CONFLICT (email)
+DO UPDATE SET
+  role = EXCLUDED.role,
   first_name = EXCLUDED.first_name,
   last_name = EXCLUDED.last_name,
   updated_at = NOW();
@@ -46,12 +48,13 @@ Check that users have been created with correct roles:
 
 ```sql
 SELECT email, role, created_at, updated_at
-FROM users 
+FROM users
 WHERE email IN ('admin@com-psu-rizal.com', 'user1@com-psu-rizal.com', 'user2@com-psu-rizal.com')
 ORDER BY email;
 ```
 
 Expected output:
+
 ```
 email                    | role    | created_at          | updated_at
 -------------------------|---------|---------------------|---------------------
@@ -63,8 +66,9 @@ user2@com-psu-rizal.com  | student | 2025-09-13 10:00:00 | 2025-09-13 10:00:00
 ## Step 4: Ensure Auth Users Exist
 
 Navigate to your Supabase Dashboard > Authentication > Users and ensure these users exist:
+
 - admin@com-psu-rizal.com
-- user1@com-psu-rizal.com  
+- user1@com-psu-rizal.com
 - user2@com-psu-rizal.com
 
 If they don't exist, create them through the dashboard or sign up through the application.
@@ -72,6 +76,7 @@ If they don't exist, create them through the dashboard or sign up through the ap
 ## Step 5: Test Authentication Flow
 
 1. Start the development server:
+
    ```bash
    npm run dev
    ```
@@ -107,6 +112,7 @@ If they don't exist, create them through the dashboard or sign up through the ap
 ### SQL Scripts Location
 
 All SQL scripts are located in the project root:
+
 - `supabase-user-setup.sql` - Main setup script
 - `check-user-roles.sql` - Check current roles
 - `fix-user-roles.sql` - Fix incorrect roles
@@ -114,12 +120,15 @@ All SQL scripts are located in the project root:
 ## Common Issues and Solutions
 
 ### Issue: "No rows returned" when checking users
+
 **Solution**: Users haven't been created yet. Run the setup SQL script.
 
 ### Issue: Admin user redirected to student dashboard
+
 **Solution**: Check that the user's role is set to 'admin' in the database.
 
 ### Issue: Authentication failed
+
 **Solution**: Ensure users exist in both the auth system and the users table.
 
 ## Additional Resources

@@ -1,35 +1,32 @@
 const { spawn } = require('child_process');
 const path = require('path');
 
-// Start Next.js development server
+// Run Next.js dev from repository root (one level up from this file)
+const repoRoot = path.resolve(__dirname, '..');
 const nextDev = spawn('npm', ['run', 'dev'], {
-  cwd: path.resolve(__dirname),
-  stdio: 'inherit'
+  cwd: repoRoot,
+  stdio: 'inherit',
 });
 
-// Start LiveMeet server
-const liveMeetPath = path.resolve(__dirname, 'externals', 'LiveMeet');
+// Run LiveMeet dev from externals/LiveMeet at repo root
+const liveMeetPath = path.resolve(repoRoot, 'externals', 'LiveMeet');
 const liveMeetServer = spawn('npm', ['run', 'dev'], {
   cwd: liveMeetPath,
-  stdio: 'inherit'
+  stdio: 'inherit',
 });
 
-// Handle process termination
-process.on('SIGINT', () => {
+// Graceful shutdown
+const shutdown = () => {
   console.log('Shutting down servers...');
-  nextDev.kill();
-  liveMeetServer.kill();
+  try { nextDev.kill(); } catch {}
+  try { liveMeetServer.kill(); } catch {}
   process.exit(0);
-});
+};
 
-process.on('SIGTERM', () => {
-  console.log('Shutting down servers...');
-  nextDev.kill();
-  liveMeetServer.kill();
-  process.exit(0);
-});
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
 
-// Handle errors
+// Error handling
 nextDev.on('error', (error) => {
   console.error('Error starting Next.js server:', error);
 });

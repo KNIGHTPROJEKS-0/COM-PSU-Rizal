@@ -45,22 +45,22 @@ export function AuthForm({
 
   return (
     <Tabs defaultValue="signin" className="w-full">
-      <TabsList className="grid w-full grid-cols-2 bg-white/10 backdrop-blur-sm">
+      <TabsList className="grid w-full grid-cols-2 bg-white/10 backdrop-blur-sm glass-enhanced">
         <TabsTrigger
           value="signin"
-          className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70"
+          className="transition-all duration-300 data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-300"
         >
           Sign In
         </TabsTrigger>
         <TabsTrigger
           value="signup"
-          className="data-[state=active]:bg-white/20 data-[state=active]:text-white text-white/70"
+          className="transition-all duration-300 data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-300"
         >
           Sign Up
         </TabsTrigger>
       </TabsList>
 
-      <TabsContent value="signin" className="space-y-4 mt-6">
+      <TabsContent value="signin" className="space-y-4 mt-6 tab-content form-fade-enter">
         <form onSubmit={onSignIn} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="signin-email" className="text-white/90">
@@ -74,7 +74,7 @@ export function AuthForm({
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
+                className="input-smooth pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
                 required
               />
             </div>
@@ -92,7 +92,7 @@ export function AuthForm({
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
+                className="input-smooth pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
                 required
               />
               <button
@@ -128,16 +128,24 @@ export function AuthForm({
 
           <Button
             type="submit"
-            className="w-full bg-white/20 hover:bg-white/30 text-white border border-white/20 backdrop-blur-sm transition-all duration-200"
+            className="w-full btn-smooth btn-primary-enhanced font-medium"
+            disabled={isLoading}
           >
-            Sign In
+            {isLoading ? (
+              <>
+                <div className="loading-spinner mr-2" />
+                Signing in...
+              </>
+            ) : (
+              "Sign In"
+            )}
           </Button>
         </form>
 
         <SocialLogin onSocialLogin={onSocialLogin} type="signin" />
       </TabsContent>
 
-      <TabsContent value="signup" className="space-y-4 mt-6">
+      <TabsContent value="signup" className="space-y-4 mt-6 tab-content form-fade-enter">
         <form onSubmit={onSignUp} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="signup-name" className="text-white/90">
@@ -151,7 +159,7 @@ export function AuthForm({
                 placeholder="Enter your full name"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
+                className="input-smooth pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
                 required
               />
             </div>
@@ -169,7 +177,7 @@ export function AuthForm({
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
+                className="input-smooth pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
                 required
               />
             </div>
@@ -187,7 +195,7 @@ export function AuthForm({
                 placeholder="Create a password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
+                className="input-smooth pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
                 required
               />
               <button
@@ -213,7 +221,7 @@ export function AuthForm({
                 placeholder="Confirm your password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
+                className="input-smooth pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-white/40 backdrop-blur-sm"
                 required
               />
             </div>
@@ -224,10 +232,17 @@ export function AuthForm({
 
           <Button
             type="submit"
-            className="w-full bg-white/20 hover:bg-white/30 text-white border border-white/20 backdrop-blur-sm transition-all duration-200"
-            disabled={password !== confirmPassword}
+            className="w-full btn-smooth btn-primary-enhanced font-medium"
+            disabled={isLoading || password !== confirmPassword}
           >
-            Create Account
+            {isLoading ? (
+              <>
+                <div className="loading-spinner mr-2" />
+                Creating account...
+              </>
+            ) : (
+              "Create Account"
+            )}
           </Button>
         </form>
 
