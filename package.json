@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack -p 3000",
     "dev:collab": "node server/index.js",
     "build": "next build",
-    "start": "next start",
+  "start": "next start -p ${PORT:-8080}",
     "lint": "next lint",
   "typecheck": "tsc -p tsconfig.json --noEmit",
   "mobile": "npm --prefix apps/mobile run start",
@@ -18,6 +18,9 @@
     "supabase:stop": "supabase stop",
     "supabase:status": "supabase status",
     "supabase:reset": "supabase db reset"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "latest",
