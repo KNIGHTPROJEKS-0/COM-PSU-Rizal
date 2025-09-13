@@ -95,15 +95,15 @@ The Supabase integration is organized into several layers:
 In Server Components:
 
 ```typescript
-import { createClient } from '@/utils/supabase/server'
-import { cookies } from 'next/headers'
+import { createClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
 
 export default async function Page() {
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
-  
-  const { data, error } = await supabase.from('todos').select()
-  
+  const cookieStore = await cookies();
+  const supabase = createClient(cookieStore);
+
+  const { data, error } = await supabase.from("todos").select();
+
   // Render your page with the data
 }
 ```
@@ -113,17 +113,17 @@ export default async function Page() {
 In Client Components:
 
 ```typescript
-'use client'
-import { createClient } from '@/utils/supabase/client'
+"use client";
+import { createClient } from "@/utils/supabase/client";
 
 export default function ClientComponent() {
-  const supabase = createClient()
-  
+  const supabase = createClient();
+
   const fetchData = async () => {
-    const { data, error } = await supabase.from('todos').select()
+    const { data, error } = await supabase.from("todos").select();
     // Handle the data
-  }
-  
+  };
+
   // Rest of your component
 }
 ```
@@ -133,16 +133,16 @@ export default function ClientComponent() {
 In `middleware.ts`:
 
 ```typescript
-import { type NextRequest } from 'next/server'
-import { createClient } from '@/utils/supabase/middleware'
+import { type NextRequest } from "next/server";
+import { createClient } from "@/utils/supabase/middleware";
 
 export async function middleware(request: NextRequest) {
-  return await createClient(request)
+  return await createClient(request);
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
-}
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+};
 ```
 
 ## Database Operations
@@ -150,35 +150,35 @@ export const config = {
 ### Authentication
 
 ```typescript
-import { useAuth } from '@/contexts/AuthContext'
+import { useAuth } from "@/contexts/AuthContext";
 
 function MyComponent() {
-  const { signIn, signUp, signOut, user } = useAuth()
-  
+  const { signIn, signUp, signOut, user } = useAuth();
+
   const handleSignIn = async () => {
     const { user, error } = await signIn({
-      email: 'student@example.com',
-      password: 'password123'
-    })
-  }
+      email: "student@example.com",
+      password: "password123",
+    });
+  };
 }
 ```
 
 ### Database Operations
 
 ```typescript
-import { getClasses, createAssignment } from '@/lib/supabaseService'
+import { getClasses, createAssignment } from "@/lib/supabaseService";
 
 // Get all classes
-const { data: classes, error } = await getClasses()
+const { data: classes, error } = await getClasses();
 
 // Create a new assignment
 const { data: assignment, error } = await createAssignment({
-  class_id: 'class-uuid',
-  title: 'Math Homework',
-  description: 'Complete exercises 1-10',
-  due_date: '2025-12-31T23:59:59Z'
-})
+  class_id: "class-uuid",
+  title: "Math Homework",
+  description: "Complete exercises 1-10",
+  due_date: "2025-12-31T23:59:59Z",
+});
 ```
 
 ## Extending the Integration

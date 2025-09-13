@@ -93,13 +93,25 @@ export default function StudentDashboard() {
                   <button className="px-3 py-2 rounded-md text-sm font-medium bg-gray-800 text-white">
                     Dashboard
                   </button>
-                  <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                  <button className="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-gray-700 hover:text-white">
                     Classes
                   </button>
-                  <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                  <button className="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-gray-700 hover:text-white">
                     Assignments
                   </button>
-                  <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                  <button 
+                    onClick={() => router.push('/dashboard/social')}
+                    className="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
+                  >
+                    Social
+                  </button>
+                  <button 
+                    onClick={() => router.push('/dashboard/documents')}
+                    className="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-gray-700 hover:text-white"
+                  >
+                    Documents
+                  </button>
+                  <button className="px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-gray-700 hover:text-white">
                     Calendar
                   </button>
                 </div>
@@ -125,53 +137,88 @@ export default function StudentDashboard() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold">Welcome back, {user?.email}</h1>
-          <p className="text-gray-400 mt-2">Here's what's happening with your classes today.</p>
+          <h1 className="text-3xl font-bold text-white">Welcome back, {user?.email}</h1>
+          <p className="text-gray-300 mt-2">Here's what's happening with your classes today.</p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card className="bg-gray-800/50 border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Enrolled Classes</CardTitle>
+              <CardTitle className="text-sm font-medium text-white">Enrolled Classes</CardTitle>
               <BookOpen className="h-4 w-4 text-purple-400" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">3</div>
-              <p className="text-xs text-gray-400">This semester</p>
+              <p className="text-xs text-gray-300">This semester</p>
             </CardContent>
           </Card>
           
           <Card className="bg-gray-800/50 border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Assignments</CardTitle>
+              <CardTitle className="text-sm font-medium text-white">Assignments</CardTitle>
               <FileText className="h-4 w-4 text-blue-400" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">6</div>
-              <p className="text-xs text-gray-400">Pending submissions</p>
+              <p className="text-xs text-gray-300">Pending submissions</p>
             </CardContent>
           </Card>
           
           <Card className="bg-gray-800/50 border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Attendance</CardTitle>
+              <CardTitle className="text-sm font-medium text-white">Attendance</CardTitle>
               <CheckCircle className="h-4 w-4 text-green-400" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">92%</div>
-              <p className="text-xs text-gray-400">This month</p>
+              <p className="text-xs text-gray-300">This month</p>
             </CardContent>
           </Card>
           
           <Card className="bg-gray-800/50 border-gray-700">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Upcoming Classes</CardTitle>
+              <CardTitle className="text-sm font-medium text-white">Upcoming Classes</CardTitle>
               <Clock className="h-4 w-4 text-yellow-400" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">2</div>
-              <p className="text-xs text-gray-400">Today</p>
+              <p className="text-xs text-gray-300">Today</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Quick Access Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <Card 
+            className="bg-gray-800/50 border-gray-700 hover:bg-gray-700/50 transition-colors cursor-pointer"
+            onClick={() => router.push('/dashboard/social')}
+          >
+            <CardHeader>
+              <CardTitle className="flex items-center text-white">
+                <Users className="h-5 w-5 mr-2 text-purple-400" />
+                Social Media Hub
+              </CardTitle>
+              <CardDescription className="text-gray-300">Connect with peers and share experiences</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-gray-300">Join the academic community and stay connected with fellow students.</p>
+            </CardContent>
+          </Card>
+          
+          <Card 
+            className="bg-gray-800/50 border-gray-700 hover:bg-gray-700/50 transition-colors cursor-pointer"
+            onClick={() => router.push('/dashboard/documents')}
+          >
+            <CardHeader>
+              <CardTitle className="flex items-center text-white">
+                <FileText className="h-5 w-5 mr-2 text-blue-400" />
+                Document Management
+              </CardTitle>
+              <CardDescription className="text-gray-300">Upload and manage your academic documents</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-gray-300">Organize your assignments, projects, and academic materials in one place.</p>
             </CardContent>
           </Card>
         </div>
@@ -182,8 +229,8 @@ export default function StudentDashboard() {
           <div className="lg:col-span-2">
             <Card className="bg-gray-800/50 border-gray-700">
               <CardHeader>
-                <CardTitle>Your Classes</CardTitle>
-                <CardDescription>Your enrolled courses this semester</CardDescription>
+                <CardTitle className="text-white">Your Classes</CardTitle>
+                <CardDescription className="text-gray-300">Your enrolled courses this semester</CardDescription>
               </CardHeader>
               <CardContent>
                 {classes.length > 0 ? (
@@ -195,14 +242,14 @@ export default function StudentDashboard() {
                       >
                         <div className="flex justify-between items-start">
                           <div>
-                            <h3 className="font-medium text-lg">{cls.name}</h3>
-                            <p className="text-sm text-gray-400 mt-1">{cls.instructor}</p>
+                            <h3 className="font-medium text-lg text-white">{cls.name}</h3>
+                            <p className="text-sm text-gray-300 mt-1">{cls.instructor}</p>
                             <div className="flex items-center mt-2 space-x-4">
-                              <div className="flex items-center text-sm text-gray-400">
+                              <div className="flex items-center text-sm text-gray-300">
                                 <Clock className="w-4 h-4 mr-1" />
                                 {cls.time}
                               </div>
-                              <div className="flex items-center text-sm text-gray-400">
+                              <div className="flex items-center text-sm text-gray-300">
                                 <FileText className="w-4 h-4 mr-1" />
                                 {cls.assignments} assignments
                               </div>
@@ -223,7 +270,7 @@ export default function StudentDashboard() {
                   <div className="text-center py-8">
                     <BookOpen className="mx-auto h-12 w-12 text-gray-500" />
                     <h3 className="mt-2 text-sm font-medium text-gray-300">No classes enrolled</h3>
-                    <p className="mt-1 text-sm text-gray-500">
+                    <p className="mt-1 text-sm text-gray-400">
                       Contact your academic advisor to enroll in classes.
                     </p>
                   </div>
@@ -237,8 +284,8 @@ export default function StudentDashboard() {
             {/* Upcoming Classes */}
             <Card className="bg-gray-800/50 border-gray-700">
               <CardHeader>
-                <CardTitle>Today's Schedule</CardTitle>
-                <CardDescription>Classes happening today</CardDescription>
+                <CardTitle className="text-white">Today's Schedule</CardTitle>
+                <CardDescription className="text-gray-300">Classes happening today</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -250,7 +297,7 @@ export default function StudentDashboard() {
                     </div>
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-300">Mathematics 101</p>
-                      <p className="text-xs text-gray-500">10:00 AM - 11:00 AM</p>
+                      <p className="text-xs text-gray-400">10:00 AM - 11:00 AM</p>
                     </div>
                     <Button 
                       size="sm"
@@ -268,7 +315,7 @@ export default function StudentDashboard() {
                     </div>
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-300">Computer Science 301</p>
-                      <p className="text-xs text-gray-500">1:00 PM - 2:30 PM</p>
+                      <p className="text-xs text-gray-400">1:00 PM - 2:30 PM</p>
                     </div>
                     <Button 
                       size="sm"
@@ -285,8 +332,8 @@ export default function StudentDashboard() {
             {/* Recent Assignments */}
             <Card className="bg-gray-800/50 border-gray-700">
               <CardHeader>
-                <CardTitle>Recent Assignments</CardTitle>
-                <CardDescription>Latest assignments from your classes</CardDescription>
+                <CardTitle className="text-white">Recent Assignments</CardTitle>
+                <CardDescription className="text-gray-300">Latest assignments from your classes</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -294,8 +341,8 @@ export default function StudentDashboard() {
                     <AlertCircle className="h-5 w-5 text-yellow-400 mt-0.5 flex-shrink-0" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-300">Problem Set 3</p>
-                      <p className="text-xs text-gray-500">Mathematics 101</p>
-                      <p className="text-xs text-gray-500 mt-1">Due tomorrow</p>
+                      <p className="text-xs text-gray-400">Mathematics 101</p>
+                      <p className="text-xs text-gray-400 mt-1">Due tomorrow</p>
                     </div>
                   </div>
                   
@@ -303,8 +350,8 @@ export default function StudentDashboard() {
                     <AlertCircle className="h-5 w-5 text-yellow-400 mt-0.5 flex-shrink-0" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-300">Lab Report 2</p>
-                      <p className="text-xs text-gray-500">Physics 201</p>
-                      <p className="text-xs text-gray-500 mt-1">Due in 3 days</p>
+                      <p className="text-xs text-gray-400">Physics 201</p>
+                      <p className="text-xs text-gray-400 mt-1">Due in 3 days</p>
                     </div>
                   </div>
                   
@@ -312,8 +359,8 @@ export default function StudentDashboard() {
                     <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
                     <div className="ml-3">
                       <p className="text-sm font-medium text-gray-300">Final Project</p>
-                      <p className="text-xs text-gray-500">Computer Science 301</p>
-                      <p className="text-xs text-gray-500 mt-1">Submitted</p>
+                      <p className="text-xs text-gray-400">Computer Science 301</p>
+                      <p className="text-xs text-gray-400 mt-1">Submitted</p>
                     </div>
                   </div>
                 </div>

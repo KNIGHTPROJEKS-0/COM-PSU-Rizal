@@ -61,7 +61,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
           let role = 'student' as 'student' | 'faculty' | 'admin'
           if (!error && userData) {
-            role = userData.role
+            role = userData.role as 'student' | 'faculty' | 'admin'
           } else {
             // Fallback to user metadata if database lookup fails
             role = (session.user.user_metadata?.role || 'student') as 'student' | 'faculty' | 'admin'
@@ -129,7 +129,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       let role = 'student' as 'student' | 'faculty' | 'admin'
       if (!error && userData) {
-        role = userData.role
+        role = userData.role as 'student' | 'faculty' | 'admin'
       } else {
         // Fallback to user metadata if database lookup fails
         role = (result.user.user_metadata?.role || 'student') as 'student' | 'faculty' | 'admin'

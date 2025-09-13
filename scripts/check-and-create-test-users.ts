@@ -29,7 +29,7 @@ async function checkTestUsers() {
     if (authError) {
       console.error('Error fetching auth users:', authError.message);
     } else {
-      const foundAuthUsers = authUsers.users.filter(user => testUsers.includes(user.email));
+      const foundAuthUsers = authUsers.users.filter(user => user.email && testUsers.includes(user.email));
       console.log('Found test auth users:', foundAuthUsers.length);
       foundAuthUsers.forEach(user => {
         console.log(`- ${user.email} (ID: ${user.id}, Confirmed: ${user.email_confirmed_at ? 'Yes' : 'No'})`);

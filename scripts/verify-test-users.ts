@@ -26,7 +26,7 @@ async function verifyTestUsers() {
     
     console.log('\nAuth Users:');
     const testEmails = ['admin@com-psu-rizal.com', 'user1@com-psu-rizal.com', 'user2@com-psu-rizal.com'];
-    const foundUsers = authUsers.users.filter(user => testEmails.includes(user.email));
+    const foundUsers = authUsers.users.filter(user => user.email && testEmails.includes(user.email));
     
     foundUsers.forEach(user => {
       console.log(`- ${user.email} (ID: ${user.id})`);

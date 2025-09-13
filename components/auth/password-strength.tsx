@@ -72,25 +72,3 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
     </div>
   )
 }
-
-export { getPasswordStrength } from "./password-strength"
-
-function getPasswordStrength(password: string) {
-  let strength = 0
-  const checks = {
-    length: password.length >= 8,
-    uppercase: /[A-Z]/.test(password),
-    lowercase: /[a-z]/.test(password),
-    number: /\d/.test(password),
-    special: /[!@#$%^&*(),.?":{}|<>]/.test(password),
-  }
-
-  strength = Object.values(checks).filter(Boolean).length
-
-  return {
-    score: strength,
-    checks,
-    label: strength < 2 ? "Weak" : strength < 4 ? "Medium" : "Strong",
-    color: strength < 2 ? "text-red-400" : strength < 4 ? "text-yellow-400" : "text-green-400",
-  }
-}

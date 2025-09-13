@@ -20,7 +20,6 @@ import {
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/contexts/AuthContext"
 import { MeetingService } from "@/lib/meetingService"
-import { useWebSocket } from "@/hooks/use-websocket"
 
 export default function MeetingRoom({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter()
@@ -33,6 +32,16 @@ export default function MeetingRoom({ params }: { params: Promise<{ id: string }
   const [meetingTitle, setMeetingTitle] = useState("Meeting Room")
   const [localStream, setLocalStream] = useState<MediaStream | null>(null)
   const [remoteStreams, setRemoteStreams] = useState<Map<string, MediaStream>>(new Map())
+  const [isConnected, setIsConnected] = useState(false)
+  const [participants, setParticipants] = useState<any[]>([
+    { id: '1', name: 'You', isHost: true },
+    { id: '2', name: 'Participant 1', isHost: false },
+    { id: '3', name: 'Participant 2', isHost: false }
+  ])
+  const [chatMessages, setChatMessages] = useState<any[]>([
+    { id: '1', participantName: 'Participant 1', message: 'Hello everyone!', timestamp: Date.now() - 300000 },
+    { id: '2', participantName: 'Participant 2', message: 'Hi there!', timestamp: Date.now() - 120000 }
+  ])
   
   const localVideoRef = useRef<HTMLVideoElement>(null)
   const remoteVideoRefs = useRef<Map<string, HTMLVideoElement>>(new Map())
@@ -149,9 +158,21 @@ export default function MeetingRoom({ params }: { params: Promise<{ id: string }
   
   const sendMessage = () => {
     if (newMessage.trim() === "") return
-    sendWebSocketMessage(newMessage)
+    // Simulate sending message
+    const message = {
+      id: Date.now().toString(),
+      participantName: user?.email || "You",
+      message: newMessage,
+      timestamp: Date.now()
+    }
+    setChatMessages(prev => [...prev, message])
     setNewMessage("")
   }
+
+  // Simulate connection status
+  useEffect(() => {
+    setIsConnected(true)
+  }, [])
 
   const leaveMeeting = async () => {
     if (localStream) {

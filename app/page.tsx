@@ -14,9 +14,15 @@ export const dynamic = "force-static"
 
 export default async function Page() {
   // Check if user is already logged in
-  const cookieStore = await cookies()
-  const supabase = createClient(cookieStore)
-  const { data: { session } } = await supabase.auth.getSession()
+  let session = null
+  try {
+    const cookieStore = await cookies()
+    const supabase = createClient(cookieStore)
+    const { data: { session: supabaseSession } } = await supabase.auth.getSession()
+    session = supabaseSession
+  } catch (error) {
+    console.warn('Failed to get session:', error)
+  }
   
   // If user is logged in, redirect to dashboard
   if (session) {
