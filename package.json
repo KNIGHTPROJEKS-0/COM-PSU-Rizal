@@ -94,7 +94,6 @@
     "mobx-react-lite": "^4.0.5",
     "framer-motion": "^11.11.17",
     "react-use": "^17.5.1",
-    "use-immer": "^0.7.0",
     "@hookform/resolvers": "^3.3.4",
     "firebase": "^10.13.2",
     "dotenv": "^16.4.5"
