@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+node_modules/**
+
+# Build outputs
+.next/
+.next/**
+dist/
+dist/**
+build/
+build/**
+out/
+out/**
+
+# Large directories to exclude from linting
+externals/
+externals/**
+integrations/
+integrations/**
+supabase/
+supabase/**
+
+# Apps and packages build outputs
+apps/*/node_modules/
+apps/*/node_modules/**
+apps/*/.next/
+apps/*/.next/**
+apps/*/dist/
+apps/*/dist/**
+apps/*/build/
+apps/*/build/**
+apps/*/out/
+apps/*/out/**
+packages/*/node_modules/
+packages/*/node_modules/**
+packages/*/.next/
+packages/*/.next/**
+packages/*/dist/
+packages/*/dist/**
+packages/*/build/
+packages/*/build/**
+packages/*/out/
+packages/*/out/**
+
+# Logs
+logs/
+logs/**
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.vscode/**
+.idea/
+.idea/**

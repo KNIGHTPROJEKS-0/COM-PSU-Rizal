@@ -27,7 +27,7 @@
         "app/*"
       ],
       "@components/*": [
-        "components/*"
+        "packages/shared-components/*"
       ],
       "@contexts/*": [
         "contexts/*"
@@ -39,13 +39,16 @@
         "integrations/*"
       ],
       "@lib/*": [
-        "lib/*"
+        "packages/shared-lib/*"
       ],
       "@server/*": [
         "server/*"
       ],
       "@utils/*": [
-        "utils/*"
+        "packages/shared-utils/*"
+      ],
+      "@ui/*": [
+        "packages/ui/*"
       ],
       "@public/*": [
         "public/*"
@@ -76,10 +79,42 @@
   ],
   "exclude": [
     "node_modules",
+    "node_modules/**",
+    ".next",
+    ".next/**",
+    "dist",
+    "dist/**",
+    "build",
+    "build/**",
+    "out",
+    "out/**",
     "externals",
-    "externals/**/*",
+    "externals/**",
     "integrations/**",
+    "supabase/**",
+    "apps/*/node_modules",
+    "apps/*/node_modules/**",
+    "packages/*/node_modules",
+    "packages/*/node_modules/**",
     "lib/angular-like/**",
-    "integrations/makenotion/typescript-go/testdata/**"
+    "lib/angular-next/**",
+    "integrations/makenotion/typescript-go/testdata/**",
+    "integrations/makenotion/typescript-go/testdata/**/*",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.d.ts",
+    ".git",
+    ".git/**",
+    ".vscode",
+    ".vscode/**",
+    "logs",
+    "logs/**",
+    "coverage",
+    "coverage/**",
+    "*.log",
+    "**/.DS_Store",
+    "**/Thumbs.db"
   ]
 }

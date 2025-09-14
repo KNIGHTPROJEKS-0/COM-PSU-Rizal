@@ -1,0 +1,322 @@
+MIT License
+
+Copyright (c) 2025 COM-PSU-Rizal Project
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+CREDITS AND ACKNOWLEDGMENTS
+================================================================================
+
+COM-PSU-Rizal is built upon the shoulders of many amazing open-source projects
+and integrations. We extend our heartfelt gratitude to all the contributors,
+maintainers, and communities behind these tools that make this project possible.
+
+---
+
+## CORE FRAMEWORKS AND RUNTIMES
+
+• React (https://reactjs.org/)
+
+- A JavaScript library for building user interfaces
+- License: MIT
+
+• Next.js (https://nextjs.org/)
+
+- The React Framework for Production
+- License: MIT
+
+• Electron (https://electronjs.org/)
+
+- Build cross-platform desktop apps with JavaScript, HTML, and CSS
+- License: MIT
+
+• Node.js (https://nodejs.org/)
+
+- JavaScript runtime built on Chrome's V8 JavaScript engine
+- License: MIT
+
+• Python (https://python.org/)
+
+- Programming language that lets you work quickly and integrate systems more effectively
+- License: PSF License
+
+---
+
+## PYTHON FRAMEWORKS AND LIBRARIES
+
+• FastAPI (https://fastapi.tiangolo.com/)
+
+- Modern, fast web framework for building APIs with Python 3.7+ based on standard Python type hints
+- License: MIT
+
+• Pydantic (https://pydantic-docs.helpmanual.io/)
+
+- Data validation and settings management using Python type hints
+- License: MIT
+
+• Starlette (https://www.starlette.io/)
+
+- A lightweight ASGI framework/toolkit, which is ideal for building high performance asyncio services
+- License: BSD
+
+• Uvicorn (https://www.uvicorn.org/)
+
+- The lightning-fast ASGI server
+- License: BSD
+
+---
+
+## UI/UX LIBRARIES AND COMPONENTS
+
+• Radix UI (https://www.radix-ui.com/)
+
+- Low-level UI primitives for building high-quality, accessible design systems and web apps
+- License: MIT
+
+• Tailwind CSS (https://tailwindcss.com/)
+
+- A utility-first CSS framework for rapidly building custom user interfaces
+- License: MIT
+
+• Framer Motion (https://www.framer.com/motion/)
+
+- A production-ready motion library for React
+- License: MIT
+
+• Bulma (https://bulma.io/)
+
+- Modern CSS framework based on Flexbox
+- License: MIT
+
+• Font Awesome (https://fontawesome.com/)
+
+- The internet's most popular icon toolkit
+- License: CC BY 4.0 / SIL OFL 1.1 / MIT
+
+• D3.js (https://d3js.org/)
+
+- A JavaScript library for visualizing data using web standards
+- License: BSD-3-Clause
+
+• Bootstrap Table (https://bootstrap-table.com/)
+
+- An extended table to integration with some of the most widely used CSS frameworks
+- License: MIT
+
+• MDB UI Kit (https://mdbootstrap.com/)
+
+- Bootstrap 5 & Material Design 2.0 UI KIT
+- License: MIT
+
+• Simple Icons (https://simpleicons.org/)
+
+- Free SVG icons for popular brands
+- License: CC0 1.0 Universal
+
+---
+
+## JAVASCRIPT UTILITIES AND LIBRARIES
+
+• Async (https://caolan.github.io/async/)
+
+- A utility module which provides straight-forward, powerful functions for working with asynchronous JavaScript
+- License: MIT
+
+• Env-var (https://github.com/evanshortiss/env-var)
+
+- Environment variable validation for Node.js
+- License: MIT
+
+• Validator.js (https://github.com/validatorjs/validator.js)
+
+- A library of string validators and sanitizers
+- License: MIT
+
+• React JSON Schema Form (https://rjsf-team.github.io/react-jsonschema-form/)
+
+- A React component for building Web forms from JSON Schema
+- License: Apache-2.0
+
+• Svix Webhooks (https://svix.com/)
+
+- The enterprise-ready webhooks service
+- License: MIT
+
+---
+
+## PERFORMANCE AND GRAPHICS LIBRARIES
+
+• GPU.js (https://gpu.rocks/)
+
+- GPU accelerated JavaScript
+- License: MIT
+
+• PixiJS (https://pixijs.com/)
+
+- The HTML5 Creation Engine
+- License: MIT
+
+• Turbit (https://github.com/turbit-wasm)
+
+- Multicore processing library for JavaScript
+- License: MIT
+
+---
+
+## DATABASE AND BACKEND SERVICES
+
+• Supabase (https://supabase.com/)
+
+- An open source Firebase alternative
+- License: Apache-2.0
+
+• PostgreSQL (https://postgresql.org/)
+
+- The world's most advanced open source relational database
+- License: PostgreSQL License
+
+• Redis (https://redis.io/)
+
+- An open source, in-memory data structure store
+- License: BSD-3-Clause
+
+---
+
+## DEVELOPMENT TOOLS AND INTEGRATIONS
+
+• TypeScript (https://typescriptlang.org/)
+
+- Typed superset of JavaScript that compiles to plain JavaScript
+- License: Apache-2.0
+
+• ESLint (https://eslint.org/)
+
+- Find and fix problems in your JavaScript code
+- License: MIT
+
+• Prettier (https://prettier.io/)
+
+- An opinionated code formatter
+- License: MIT
+
+• Webpack (https://webpack.js.org/)
+
+- Static module bundler for modern JavaScript applications
+- License: MIT
+
+• Babel (https://babeljs.io/)
+
+- JavaScript compiler
+- License: MIT
+
+---
+
+## SPECIAL ACKNOWLEDGMENTS
+
+• Notion (https://notion.so/)
+
+- All-in-one workspace for notes, docs, and projects
+- Special thanks for inspiring our document management and collaboration features
+- License: Proprietary (SaaS)
+
+• Docker (https://docker.com/)
+
+- Container platform for developing, shipping, and running applications
+- License: Apache-2.0
+
+• GitHub (https://github.com/)
+
+- Development platform for version control and collaboration
+- License: Proprietary
+
+• VS Code (https://code.visualstudio.com/)
+
+- Code editor redefined and optimized for building and debugging modern web and cloud applications
+- License: MIT
+
+---
+
+## ADDITIONAL INTEGRATIONS AND TOOLS
+
+• Angular-like Components (Custom Implementation)
+
+- Inspired by Angular's component architecture for React applications
+
+• React Native WebView (https://github.com/react-native-webview/react-native-webview)
+
+- React Native WebView for iOS and Android
+- License: MIT
+
+• Protobuf.js (https://protobufjs.github.io/protobuf.js/)
+
+- Protocol Buffers for JavaScript (& TypeScript)
+- License: BSD-3-Clause
+
+• Spring Boot (Integration)
+
+- Framework for building production-ready applications
+- License: Apache-2.0
+
+• Sonic (Integration)
+
+- Fast, lightweight & schema-less search backend
+- License: MPL-2.0
+
+• Post Processing (Integration)
+
+- A post processing library for three.js
+- License: MIT
+
+• GLTF JSX (Integration)
+
+- GLTF to JSX converter
+- License: MIT
+
+• Dioxus (Integration)
+
+- Portable, performant, and ergonomic framework for building cross-platform user interfaces
+- License: MIT
+
+---
+
+## CONTRIBUTOR LICENSE AGREEMENT
+
+By contributing to this project, you agree that your contributions will be
+licensed under the same MIT License that covers the project. If you did not
+write the code yourself, you must ensure that the original author or
+licensor allows the code to be used under the MIT License.
+
+---
+
+## DISCLAIMER
+
+This project is not affiliated with, endorsed by, or sponsored by any of the
+mentioned third-party services, libraries, or companies. All trademarks,
+service marks, and trade names used in this project are for identification
+purposes only and are the property of their respective owners.
+
+The inclusion of third-party libraries and services does not imply any
+endorsement or warranty from their respective authors or maintainers.
+
+================================================================================
+For questions about licensing or contributions, please contact:
+COM-PSU-Rizal Project Team
+Email: opensource@com-psu-rizal.dev
+================================================================================

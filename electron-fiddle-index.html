@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSU Rizal Desktop</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow: hidden;
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .loading-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .workspace-container {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        .workspace-header {
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .workspace-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .workspace-subtitle {
+            color: #64748b;
+            margin: 5px 0 0 0;
+        }
+
+        .workspace-content {
+            padding: 30px;
+        }
+
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .workspace-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .card-description {
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .error-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .error-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            font-size: 14px;
+            line-height: 1.5;
+            max-width: 400px;
+        }
+
+        .retry-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #dc2626;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .retry-button:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading-container" class="loading-container">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading PSU Rizal Desktop...</div>
+        <div class="loading-subtitle">Initializing workspace environment</div>
+    </div>
+
+    <div id="workspace-container" class="workspace-container">
+        <div class="workspace-header">
+            <h1 class="workspace-title">PSU Rizal Eisenhower Matrix</h1>
+            <p class="workspace-subtitle">Productivity Workspace - Organize your tasks by urgency and importance</p>
+        </div>
+        <div class="workspace-content">
+            <div class="workspace-grid">
+                <div class="workspace-card">
+                    <h3 class="card-title">🔥 Urgent & Important</h3>
+                    <p class="card-description">Critical tasks that need immediate attention. Focus here first.</p>
+                </div>
+                <div class="workspace-card">
+                    <h3 class="card-title">📅 Important but Not Urgent</h3>
+                    <p class="card-description">Strategic tasks for long-term success. Schedule these.</p>
+                </div>
+                <div class="workspace-card">
+                    <h3 class="card-title">📞 Urgent but Not Important</h3>
+                    <p class="card-description">Interruptions that seem urgent. Delegate when possible.</p>
+                </div>
+                <div class="workspace-card">
+                    <h3 class="card-title">🗑️ Neither Urgent nor Important</h3>
+                    <p class="card-description">Time-wasters. Eliminate or minimize these activities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="error-container" class="error-container" style="display: none;">
+        <div class="error-title">⚠️ Connection Error</div>
+        <div class="error-message">
+            Cannot connect to PSU Rizal webapp on port 3002.<br>
+            Please ensure the webapp is running: <code>npm run dev:webapp</code>
+        </div>
+        <button class="retry-button" onclick="retryConnection()">Retry Connection</button>
+    </div>
+
+    <script src="./electron-fiddle-renderer.js"></script>
+</body>
+</html>

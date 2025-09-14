@@ -1,4 +1,4 @@
-# COM-PSU-Rizal
+# COM-PSU-Rizal Monorepo
 
 ![COM-PSU-Rizal Logo](public/icons/com-psu-rizal-white.svg)
 
@@ -10,6 +10,80 @@
 | |____| |__| | |  | |  | |__| | |_) | |\  |
  \_____\____/|_|  |_|   \____/|____/|_| \_|
 
+```
+
+## Project Structure
+
+This is a monorepo containing the PSU Rizal application with separate webapp and desktop applications.
+
+```
+com-psu-rizal-monorepo/
+├── apps/
+│   ├── webapp/          # Next.js web application (port 3001)
+│   └── desktop/         # Electron desktop application (port 3002)
+├── packages/
+│   ├── shared-components/  # Shared React components
+│   └── shared-lib/         # Shared utilities and services
+├── scripts/             # Build and deployment scripts
+└── supabase/            # Supabase configuration
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js >= 18
+- npm or yarn
+
+### Installation
+
+1. Install all dependencies:
+
+```bash
+npm run install:all
+```
+
+### Running Applications
+
+#### Web Application (Port 3001)
+
+```bash
+# Development
+npm run dev:webapp
+
+# Production build
+npm run build:webapp
+
+# Start production server
+npm run start:webapp
+```
+
+#### Desktop Application (Port 3002)
+
+```bash
+# Development
+npm run dev:desktop
+
+# Build for production
+npm run build:desktop
+```
+
+### Running Both Applications Simultaneously
+
+You can run both applications independently on different ports:
+
+**Terminal 1 - Web App:**
+
+```bash
+npm run dev:webapp
+# Runs on http://localhost:3001
+```
+
+**Terminal 2 - Desktop App:**
+
+```bash
+npm run dev:desktop
+# Runs on http://localhost:3002 (Electron window)
 ```
 
 ## Landing Page

@@ -19,6 +19,17 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# Process management
+.pids/
+*.pid
+.webapp.pid
+.electron.pid
+.python.pid
+
+# Logs
+logs/
+*.log
+
 # Local env files
 .env*.local
 
@@ -88,6 +99,14 @@ typings/
 
 # Optional REPL history
 .node_repl_history
+
+# Bytedance and TensorFlow build artifacts
+integrations/bytedance/byteir/compiler/build/
+integrations/tensorflow/bazel-bin/
+integrations/tensorflow/bazel-genfiles/
+integrations/tensorflow/bazel-out/
+integrations/tensorflow/bazel-testlogs/
+integrations/tensorflow/bazel-tensorflow/
 
 # Output of 'npm pack'
 *.tgz
@@ -164,3 +183,22 @@ Thumbs.db
 
 # Externals directory
 externals/
+
+# Large integration directories (exclude from language processing)
+integrations/
+supabase/
+
+# Build outputs
+apps/*/dist/
+apps/*/.next/
+apps/*/out/
+packages/*/dist/
+packages/*/.next/
+packages/*/out/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
