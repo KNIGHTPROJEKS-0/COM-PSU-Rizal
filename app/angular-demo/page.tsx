@@ -75,7 +75,7 @@ class DemoComponent extends React.Component<{
   outputValue: string = '';
 
   @AngularHostListener('click')
-  handleClick() {
+  handleClick = () => {
     this.outputValue = this.inputValue.toUpperCase();
     this.props.onOutputChange(this.outputValue);
   }

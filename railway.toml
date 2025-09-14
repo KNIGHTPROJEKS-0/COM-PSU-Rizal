@@ -1,4 +1,6 @@
 [build]
+# Railway build configuration using Nixpacks (https://nixpacks.com/)
+# Nixpacks is a build tool that automatically detects and builds applications
 builder = "NIXPACKS"
 
 [build.nixpacks]
@@ -21,7 +23,8 @@ startCmd = "pnpm start"
 # Set the port for the application
 port = 3001
 
-# Health check configuration
+# Health check configuration for Railway deployment monitoring
+# Railway uses health checks to ensure the application is running properly
 healthcheckPath = "/"
 healthcheckTimeout = 300
 

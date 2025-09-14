@@ -14,6 +14,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./supabase/migrations:/docker-entrypoint-initdb.d
+    # Health check configuration for PostgreSQL
+    # Docker uses health checks to ensure the database is ready before starting dependent services
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -38,6 +40,8 @@ services:
       GOTRUE_MAILER_AUTOCONFIRM: true
     ports:
       - "9999:9999"
+    # Health check configuration for Supabase Auth service
+    # Ensures the authentication service is responding properly
     healthcheck:
       test:
         [
@@ -142,6 +146,8 @@ services:
     volumes:
       - ./services/python:/app
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    # Health check configuration for Python/FastAPI service
+    # Ensures the API service is responding to health endpoint
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
@@ -156,6 +162,8 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    # Health check configuration for Redis cache service
+    # Ensures Redis is responding to ping commands
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
