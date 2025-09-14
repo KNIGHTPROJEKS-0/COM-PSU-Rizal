@@ -1,0 +1,6 @@
+# Initial commit with organized project structure
+- Organized scripts into categorized directories
+- Fixed TypeScript configuration for global types
+- Set up proper project architecture
+- Configured Railway deployment
+- Added comprehensive documentation

@@ -12,14 +12,14 @@ function createWindow() {
             nodeIntegration: false,
             contextIsolation: true,
             enableRemoteModule: false,
-            preload: path.join(__dirname, 'electron-fiddle-preload.js')
+            preload: path.join(__dirname, 'preload.js')
         },
         title: 'PSU Rizal Desktop - Electron Fiddle',
         icon: null // Add icon path if available
     });
 
     // Load the HTML file
-    mainWindow.loadFile('electron-fiddle-index.html');
+    mainWindow.loadFile('index.html');
 
     // Open DevTools in development
     if (process.env.NODE_ENV === 'development') {

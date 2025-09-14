@@ -4,7 +4,10 @@
     "module": "esnext",
     "lib": [
       "es2020",
-      "dom"
+      "dom",
+      "dom.iterable",
+      "es6",
+      "es5"
     ],
     "allowJs": true,
     "outDir": "./dist",
@@ -73,9 +76,17 @@
   },
   "include": [
     "next-env.d.ts",
+    "app/**/*",
+    "apps/webapp/**/*",
+    "contexts/**/*",
+    "hooks/**/*",
+    "packages/shared-*/**/*",
+    "packages/ui/**/*",
+    "scripts/**/*",
+    "server/**/*",
+    "services/**/*",
     "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules",
@@ -90,16 +101,14 @@
     "out/**",
     "externals",
     "externals/**",
-    "integrations/**",
-    "supabase/**",
+    "frameworks",
+    "frameworks/**",
+    "capacitor",
+    "capacitor/**",
     "apps/*/node_modules",
     "apps/*/node_modules/**",
     "packages/*/node_modules",
     "packages/*/node_modules/**",
-    "lib/angular-like/**",
-    "lib/angular-next/**",
-    "integrations/makenotion/typescript-go/testdata/**",
-    "integrations/makenotion/typescript-go/testdata/**/*",
     "**/*.test.ts",
     "**/*.test.tsx",
     "**/*.spec.ts",
