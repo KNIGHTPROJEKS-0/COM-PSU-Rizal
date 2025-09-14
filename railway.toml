@@ -40,6 +40,8 @@ healthcheckTimeout = 300
 # GEMINI_API_KEY = "..."
 # AUTH_JWT_SECRET = "..."
 # VERCEL_ACCESS_TOKEN = "..."
+# POSTGRES_URL = ""  # Leave empty if not using PostgreSQL
+# DATABASE_URL = ""  # Leave empty if not using database
 
 # Railway specific settings
 [railway]
