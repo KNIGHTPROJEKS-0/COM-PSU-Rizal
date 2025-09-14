@@ -74,6 +74,7 @@ jspm_packages/
 frameworks/
 docs/
 externals/
+packages/ui/
 
 # Test files and configurations
 **/*.test.*

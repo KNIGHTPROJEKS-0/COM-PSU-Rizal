@@ -202,3 +202,14 @@ logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+.augment
+.bevel
+.cursor
+.kiro
+.qoder
+.qwen
+.trae
+config
+config/
