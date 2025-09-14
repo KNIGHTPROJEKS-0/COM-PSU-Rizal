@@ -1,0 +1,41 @@
+type User @table {
+  firebaseUid: String!
+  displayName: String!
+  email: String!
+  createdAt: Timestamp!
+  photoUrl: String
+  academicRole: String
+}
+
+type Meeting @table {
+  meetingId: String!
+  hostUser: User!
+  startTime: Timestamp!
+  createdAt: Timestamp!
+  title: String
+  description: String
+  endTime: Timestamp
+}
+
+type Participant @table(key: ["meeting", "user"]) {
+  meeting: Meeting!
+  user: User!
+  joinedAt: Timestamp!
+  leftAt: Timestamp
+  roleInMeeting: String
+}
+
+type ChatMessage @table {
+  meeting: Meeting!
+  user: User!
+  message: String!
+  timestamp: Timestamp!
+}
+
+type MeetingInvitation @table(key: ["meeting", "invitedUser"]) {
+  meeting: Meeting!
+  invitedUser: User!
+  invitedAt: Timestamp!
+  acceptedAt: Timestamp
+  rejectedAt: Timestamp
+}

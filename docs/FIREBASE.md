@@ -21,9 +21,9 @@ Use `lib/firebaseClient.ts` to get the app and (optionally) Analytics in client 
 Example:
 
 ```tsx
-'use client';
-import { useEffect } from 'react';
-import { getFirebaseApp, getFirebaseAnalytics } from '@/lib/firebaseClient';
+"use client";
+import { useEffect } from "react";
+import { getFirebaseApp, getFirebaseAnalytics } from "@/lib/firebaseClient";
 
 export default function AnalyticsBoot() {
   useEffect(() => {
@@ -39,7 +39,7 @@ In Next.js App Router, you can include this in `app/layout.tsx` under a client-o
 ## App Hosting notes
 
 - The root `package.json` start script respects PORT and Node engines are set for Firebase App Hosting.
-- Ensure env vars are configured in Firebase console → App Hosting → Environment variables (use the NEXT_PUBLIC_ keys).
+- Ensure env vars are configured in Firebase console → App Hosting → Environment variables (use the NEXT*PUBLIC* keys).
 
 ## Troubleshooting
 

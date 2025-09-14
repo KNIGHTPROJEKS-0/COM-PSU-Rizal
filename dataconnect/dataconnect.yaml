@@ -1,0 +1,12 @@
+specVersion: "v1"
+serviceId: "COM-PSU-Rizal"
+location: "asia-southeast1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "com-firebase-database-psu-rizal"
+      cloudSql:
+        instanceId: "com-psu-rizal-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
