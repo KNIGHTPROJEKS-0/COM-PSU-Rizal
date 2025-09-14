@@ -13,6 +13,12 @@ out/
 .env.development
 .env.test
 
+# Config files with sensitive data (API keys, private keys, secrets)
+config/
+config/*.json
+firebase-admin-sdk.json
+google-client-secret.json
+
 # IDE and editor files
 .vscode/
 .idea/
