@@ -1,16 +1,19 @@
 # COM-PSU-Rizal Monorepo
 
-![COM-PSU-Rizal Logo](public/icons/com-psu-rizal-white.svg)
+<div align="center">
+  <img src="public/icons/com-psu-rizal-white.svg" alt="COM-PSU-Rizal Logo" width="80" height="80" style="margin-right: 20px;">
+  <h1>COM-PSU-Rizal</h1>
+</div>
 
-```
-  _____  ____  __  __     ____  ____  _   _
- / ____|/ __ \|  \/  |   / __ \|  _ \| \ | |
-| |    | |  | | \  / |  | |  | | |_) |  \| |
-| |    | |  | | |\/| |  | |  | |  _ <| . ` |
-| |____| |__| | |  | |  | |__| | |_) | |\  |
- \_____\____/|_|  |_|   \____/|____/|_| \_|
+## Featured Video
 
-```
+<div align="center">
+  <video width="640" height="360" controls>
+    <source src="public/media/COM-v0.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p><em>COM-PSU-Rizal Project Overview</em></p>
+</div>
 
 ## Project Structure
 
