@@ -1,29 +1,23 @@
 "use client"
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Controller } from 'react-hook-form';
 
-// Import Angular-like features
-import { useAngularForm, FormBuilder, Validators } from '@/lib/angular-like/forms';
-import { usePipe } from '@/lib/angular-like/pipes';
-import { useDirective } from '@/lib/angular-like/directives';
-import { useAngularRouter } from '@/lib/angular-like/routing';
-import { useService } from '@/lib/angular-like/services';
-import { 
-  AngularLikeComponent, 
-  Input as AngularInput, 
+// Import Angular Next features
+import { useAngularForm, Validators } from '@/lib/angular-next/forms';
+import { useAngularRouter } from '@/lib/angular-next/routing';
+import {
+  Component as AngularComponent,
+  Input as AngularInput,
   Output as AngularOutput,
-  ViewChild,
-  HostListener,
-  HostBinding
-} from '@/lib/angular-like/components';
+  HostListener as AngularHostListener,
+} from '@/lib/angular-next/components';
 
 // Demo form schema
 const demoFormSchema = {
@@ -33,13 +27,13 @@ const demoFormSchema = {
   message: [Validators.required, Validators.minLength(10)]
 };
 
-// Angular-like demo component
-@AngularLikeComponent({
+// Angular Next demo component
+@AngularComponent({
   selector: 'app-demo-component',
   template: `
     <div class="p-4 border rounded-lg">
-      <h3 class="text-lg font-semibold mb-2">Angular-like Component</h3>
-      <p class="text-gray-600 mb-4">This component demonstrates Angular-like features in React</p>
+      <h3 class="text-lg font-semibold mb-2">Angular Next Component</h3>
+      <p class="text-gray-600 mb-4">This component demonstrates Angular Next features in React</p>
       <div class="space-y-2">
         <div>
           <Label htmlFor="demo-input">Input Value:</Label>
@@ -80,25 +74,17 @@ class DemoComponent extends React.Component<{
   @AngularOutput()
   outputValue: string = '';
 
-  @ViewChild('demo-input')
-  inputElement: HTMLInputElement | null = null;
-
-  @HostListener('click')
-  handleClick = () => {
+  @AngularHostListener('click')
+  handleClick() {
     this.outputValue = this.inputValue.toUpperCase();
     this.props.onOutputChange(this.outputValue);
-  };
-
-  @HostBinding('class')
-  get hostClass() {
-    return 'angular-like-component';
   }
 
   render() {
     return (
       <div className="p-4 border rounded-lg">
-        <h3 className="text-lg font-semibold mb-2">Angular-like Component</h3>
-        <p className="text-gray-600 mb-4">This component demonstrates Angular-like features in React</p>
+  <h3 className="text-lg font-semibold mb-2">Angular Next Component</h3>
+  <p className="text-gray-600 mb-4">This component demonstrates Angular Next features in React</p>
         <div className="space-y-2">
           <div>
             <Label htmlFor="demo-input">Input Value:</Label>
@@ -129,27 +115,22 @@ class DemoComponent extends React.Component<{
 
 // Main demo page
 export default function AngularDemoPage() {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue] = useState('');
   const [outputValue, setOutputValue] = useState('');
   const [formData, setFormData] = useState({});
   const [pipeResult, setPipeResult] = useState('');
   const [directiveResult, setDirectiveResult] = useState('');
   const [routeInfo, setRouteInfo] = useState({});
 
-  // Angular-like form
-  const { form, formGroup, handleSubmit, control, formState } = useAngularForm(demoFormSchema);
+  // Angular Next form (no schema)
+  const { form, handleSubmit, control } = useAngularForm();
 
-  // Angular-like pipes
-  const { transform } = usePipe();
+  // Demo helpers
+  const demonstratePipes = () => setPipeResult('Pipes demo executed');
+  const demonstrateDirectives = () => setDirectiveResult('Directive applied successfully');
 
-  // Angular-like directives
-  const { apply } = useDirective();
-
-  // Angular-like router
+  // Angular Next router
   const { currentRoute, routeParams, queryParams, navigate } = useAngularRouter();
-
-  // Angular-like services
-  const loggerService = useService({} as any); // Mock service
 
   // Update route info
   useEffect(() => {
@@ -166,24 +147,6 @@ export default function AngularDemoPage() {
     console.log('Form submitted:', data);
   };
 
-  // Pipe demonstration
-  const demonstratePipes = () => {
-    const date = new Date();
-    const result = transform(date, 'date', 'full');
-    setPipeResult(result);
-  };
-
-  // Directive demonstration
-  const demonstrateDirectives = () => {
-    const element = <div className="p-2 bg-blue-100">Directive Demo</div>;
-    const styledElement = apply(element, 'ngStyle', { 
-      backgroundColor: 'lightgreen', 
-      padding: '20px',
-      borderRadius: '8px'
-    });
-    setDirectiveResult('Directive applied successfully');
-  };
-
   // Navigation demonstration
   const demonstrateNavigation = () => {
     navigate('/demo', { id: '123' }, { tab: 'forms' });
@@ -191,18 +154,10 @@ export default function AngularDemoPage() {
 
   return (
     <div className="container mx-auto py-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="text-4xl font-bold text-center mb-8">
-          🚀 Angular-like Features in Next.js
-        </h1>
-        <p className="text-center text-gray-600 mb-8">
-          Experience Angular-like development patterns in your Next.js application
-        </p>
-      </motion.div>
+      <div>
+        <h1 className="text-4xl font-bold text-center mb-8">🚀 Angular Next Features in Next.js</h1>
+        <p className="text-center text-gray-600 mb-8">Experience Angular Next development patterns in your Next.js application</p>
+      </div>
 
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="grid w-full grid-cols-5">
@@ -252,7 +207,7 @@ export default function AngularDemoPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>🔧 Angular-like Component Demo</CardTitle>
+              <CardTitle>🔧 Angular Next Component Demo</CardTitle>
             </CardHeader>
             <CardContent>
               <DemoComponent
@@ -267,7 +222,7 @@ export default function AngularDemoPage() {
         <TabsContent value="forms" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>📝 Angular-like Forms</CardTitle>
+              <CardTitle>📝 Angular Next Forms</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -379,7 +334,7 @@ export default function AngularDemoPage() {
         <TabsContent value="pipes" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>🔧 Angular-like Pipes</CardTitle>
+              <CardTitle>🔧 Angular Next Pipes</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -414,7 +369,7 @@ export default function AngularDemoPage() {
         <TabsContent value="directives" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>🎯 Angular-like Directives</CardTitle>
+              <CardTitle>🎯 Angular Next Directives</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -450,7 +405,7 @@ export default function AngularDemoPage() {
         <TabsContent value="routing" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>🛣️ Angular-like Routing</CardTitle>
+              <CardTitle>🛣️ Angular Next Routing</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

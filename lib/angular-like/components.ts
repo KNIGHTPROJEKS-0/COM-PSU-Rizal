@@ -7,4 +7,4 @@ export * from "./components.tsx";
 
 // Angular-like component with all features
 // Re-export TSX implementation to keep import paths stable and avoid JSX parsing in .ts files
-export * from './components.tsx';
+export * from "./components.tsx";

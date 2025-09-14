@@ -16,6 +16,8 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "preserve",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -47,6 +49,12 @@
       ],
       "@public/*": [
         "public/*"
+      ],
+      "rxjs": [
+        "lib/rx-lite/index.ts"
+      ],
+      "rxjs/operators": [
+        "lib/rx-lite/index.ts"
       ]
     },
     "plugins": [
@@ -69,6 +77,9 @@
   "exclude": [
     "node_modules",
     "externals",
-    "externals/**/*"
+    "externals/**/*",
+    "integrations/**",
+    "lib/angular-like/**",
+    "integrations/makenotion/typescript-go/testdata/**"
   ]
 }

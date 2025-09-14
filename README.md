@@ -520,8 +520,91 @@ pnpm install
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
    SUPABASE_SERVICE_KEY=your_supabase_service_key
    ```
+
+### Supabase Setup
+
+1. Create a Supabase project at [supabase.com](https://supabase.com/)
+2. Copy your Supabase URL and Anon Key from the project settings
+3. Create a `.env.local` file in the root directory with the following variables:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_SERVICE_KEY=your_supabase_service_key
+   ```
 4. Run the database migrations from `supabase/migrations/` in your Supabase SQL editor
 5. Set up the storage bucket for assignments in the Supabase dashboard
+
+### Testing Supabase Connection
+
+After setting up Supabase, you can verify that everything is working correctly:
+
+1. **Automated Setup Verification**:
+
+   ```bash
+   node scripts/verify-setup.js
+   ```
+
+   This script checks all configuration files, dependencies, and environment variables.
+
+2. **Interactive Connection Test**:
+   - Start the development server: `npm run dev`
+   - Visit `http://localhost:3000/test-connection` in your browser
+   - This page will test the Supabase connection and show detailed results
+
+3. **API Connection Test**:
+   - Visit `http://localhost:3000/api/test-connection` for JSON response
+   - Useful for automated testing and CI/CD pipelines
+
+### Railway Deployment
+
+Deploy Supabase to Railway using the automated deployment script:
+
+1. **Install Railway CLI**:
+
+   ```bash
+   npm install -g @railway/cli
+   # or
+   curl -fsSL https://railway.app/install.sh | sh
+   ```
+
+2. **Set Railway Token**:
+
+   ```bash
+   export RAILWAY_TOKEN=0c275f51-45b5-4ee1-b78a-5e3fa62e624f
+   ```
+
+3. **Deploy to Railway**:
+
+   ```bash
+   npm run railway:deploy
+   ```
+
+4. **Load Remote Users** (after deployment):
+   ```bash
+   npm run supabase:load-users
+   ```
+
+### Local Docker Development
+
+For local development with Docker Compose:
+
+1. **Start Services**:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **Access Services**:
+   - Supabase Studio: http://localhost:54323
+   - API: http://localhost:3001
+   - Auth: http://localhost:9999
+   - Realtime: http://localhost:4000
+   - Storage: http://localhost:8000
+
+3. **Load Test Users**:
+   ```bash
+   npm run supabase:load-users
+   ```
 
 ### Test User Setup
 

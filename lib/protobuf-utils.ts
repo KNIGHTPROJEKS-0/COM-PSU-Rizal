@@ -1,4 +1,4 @@
-import * as protobuf from 'protobufjs';
+import * as protobuf from "protobufjs";
 
 // Protobuf message definitions for the COM-PSU-Rizal system
 const PROTO_DEFINITIONS = {
@@ -17,7 +17,7 @@ const PROTO_DEFINITIONS = {
       bool is_active = 7;
     }
   `,
-  
+
   // Document data message
   DocumentMessage: `
     syntax = "proto3";
@@ -35,7 +35,7 @@ const PROTO_DEFINITIONS = {
       bool is_public = 9;
     }
   `,
-  
+
   // Meeting data message
   MeetingMessage: `
     syntax = "proto3";
@@ -53,7 +53,7 @@ const PROTO_DEFINITIONS = {
       string meeting_url = 9;
     }
   `,
-  
+
   // Analytics data message
   AnalyticsMessage: `
     syntax = "proto3";
@@ -65,7 +65,7 @@ const PROTO_DEFINITIONS = {
       int64 timestamp = 3;
       map<string, string> metadata = 4;
     }
-  `
+  `,
 };
 
 // Cached message types
@@ -78,11 +78,13 @@ export async function initProtobufTypes(): Promise<void> {
   try {
     for (const [name, definition] of Object.entries(PROTO_DEFINITIONS)) {
       const root = protobuf.parse(definition).root;
-      const messageType = root.lookupType(`com.psu.rizal.${name.replace('Message', '')}`);
+      const messageType = root.lookupType(
+        `com.psu.rizal.${name.replace("Message", "")}`,
+      );
       messageTypes[name] = messageType;
     }
   } catch (error) {
-    console.error('Failed to initialize protobuf types:', error);
+    console.error("Failed to initialize protobuf types:", error);
     throw error;
   }
 }
@@ -90,7 +92,10 @@ export async function initProtobufTypes(): Promise<void> {
 /**
  * Serialize data to protobuf buffer
  */
-export function serializeToProtobuf<T>(messageName: string, data: T): Uint8Array {
+export function serializeToProtobuf<T extends { [k: string]: any }>(
+  messageName: string,
+  data: T,
+): Uint8Array {
   const messageType = messageTypes[messageName];
   if (!messageType) {
     throw new Error(`Message type ${messageName} not found`);
@@ -108,7 +113,10 @@ export function serializeToProtobuf<T>(messageName: string, data: T): Uint8Array
 /**
  * Deserialize protobuf buffer to data
  */
-export function deserializeFromProtobuf<T>(messageName: string, buffer: Uint8Array): T {
+export function deserializeFromProtobuf<T>(
+  messageName: string,
+  buffer: Uint8Array,
+): T {
   const messageType = messageTypes[messageName];
   if (!messageType) {
     throw new Error(`Message type ${messageName} not found`);
@@ -127,56 +135,56 @@ export function deserializeFromProtobuf<T>(messageName: string, buffer: Uint8Arr
  * Serialize user data
  */
 export function serializeUser(user: any): Uint8Array {
-  return serializeToProtobuf('UserMessage', user);
+  return serializeToProtobuf("UserMessage", user);
 }
 
 /**
  * Deserialize user data
  */
 export function deserializeUser(buffer: Uint8Array): any {
-  return deserializeFromProtobuf('UserMessage', buffer);
+  return deserializeFromProtobuf("UserMessage", buffer);
 }
 
 /**
  * Serialize document data
  */
 export function serializeDocument(document: any): Uint8Array {
-  return serializeToProtobuf('DocumentMessage', document);
+  return serializeToProtobuf("DocumentMessage", document);
 }
 
 /**
  * Deserialize document data
  */
 export function deserializeDocument(buffer: Uint8Array): any {
-  return deserializeFromProtobuf('DocumentMessage', buffer);
+  return deserializeFromProtobuf("DocumentMessage", buffer);
 }
 
 /**
  * Serialize meeting data
  */
 export function serializeMeeting(meeting: any): Uint8Array {
-  return serializeToProtobuf('MeetingMessage', meeting);
+  return serializeToProtobuf("MeetingMessage", meeting);
 }
 
 /**
  * Deserialize meeting data
  */
 export function deserializeMeeting(buffer: Uint8Array): any {
-  return deserializeFromProtobuf('MeetingMessage', buffer);
+  return deserializeFromProtobuf("MeetingMessage", buffer);
 }
 
 /**
  * Serialize analytics data
  */
 export function serializeAnalytics(analytics: any): Uint8Array {
-  return serializeToProtobuf('AnalyticsMessage', analytics);
+  return serializeToProtobuf("AnalyticsMessage", analytics);
 }
 
 /**
  * Deserialize analytics data
  */
 export function deserializeAnalytics(buffer: Uint8Array): any {
-  return deserializeFromProtobuf('AnalyticsMessage', buffer);
+  return deserializeFromProtobuf("AnalyticsMessage", buffer);
 }
 
 /**
@@ -188,10 +196,15 @@ export function createProtobufService(serviceName: string, methods: string[]) {
     package com.psu.rizal;
     
     service ${serviceName} {
-      ${methods.map(method => `rpc ${method} (${method}Request) returns (${method}Response);`).join('\n      ')}
+      ${
+    methods.map((method) =>
+      `rpc ${method} (${method}Request) returns (${method}Response);`
+    ).join("\n      ")
+  }
     }
     
-    ${methods.map(method => `
+    ${
+    methods.map((method) => `
     message ${method}Request {
       string data = 1;
     }
@@ -201,7 +214,8 @@ export function createProtobufService(serviceName: string, methods: string[]) {
       bool success = 2;
       string error = 3;
     }
-    `).join('\n')}
+    `).join("\n")
+  }
   `;
 
   const root = protobuf.parse(serviceDefinition).root;
@@ -218,29 +232,37 @@ export function compareSerializationSizes(data: any, messageName: string): {
 } {
   const jsonString = JSON.stringify(data);
   const jsonSize = new TextEncoder().encode(jsonString).length;
-  
+
   const protobufBuffer = serializeToProtobuf(messageName, data);
   const protobufSize = protobufBuffer.length;
-  
+
   const compressionRatio = jsonSize / protobufSize;
-  
+
   return {
     jsonSize,
     protobufSize,
-    compressionRatio
+    compressionRatio,
   };
 }
 
 /**
  * Batch serialize multiple messages
  */
-export function batchSerialize<T>(messageName: string, dataArray: T[]): Uint8Array[] {
-  return dataArray.map(data => serializeToProtobuf(messageName, data));
+export function batchSerialize<T extends { [k: string]: any }>(
+  messageName: string,
+  dataArray: T[],
+): Uint8Array[] {
+  return dataArray.map((data) => serializeToProtobuf(messageName, data));
 }
 
 /**
  * Batch deserialize multiple messages
  */
-export function batchDeserialize<T>(messageName: string, buffers: Uint8Array[]): T[] {
-  return buffers.map(buffer => deserializeFromProtobuf<T>(messageName, buffer));
+export function batchDeserialize<T>(
+  messageName: string,
+  buffers: Uint8Array[],
+): T[] {
+  return buffers.map((buffer) =>
+    deserializeFromProtobuf<T>(messageName, buffer)
+  );
 }
