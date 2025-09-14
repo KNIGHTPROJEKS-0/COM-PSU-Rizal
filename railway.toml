@@ -1,0 +1,94 @@
+[build]
+builder = "NIXPACKS"
+
+[build.nixpacks]
+# Use Node.js 18+ as specified in package.json
+nodeVersion = "18"
+
+# Set the working directory to the webapp
+workdir = "apps/webapp"
+
+# Use pnpm as the package manager
+installCmd = "npm install -g pnpm && pnpm install --frozen-lockfile"
+
+# Build command for the webapp
+buildCmd = "pnpm build"
+
+# Start command for production
+startCmd = "pnpm start"
+
+[deploy]
+# Set the port for the application
+port = 3001
+
+# Health check configuration
+healthcheckPath = "/"
+healthcheckTimeout = 300
+
+# Environment variables (these will be set in Railway dashboard or via CLI)
+# NEXT_PUBLIC_SUPABASE_URL = "..."
+# NEXT_PUBLIC_SUPABASE_ANON_KEY = "..."
+# SUPABASE_SERVICE_ROLE_KEY = "..."
+# NEXT_PUBLIC_FIREBASE_API_KEY = "..."
+# NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN = "..."
+# NEXT_PUBLIC_FIREBASE_PROJECT_ID = "..."
+# NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET = "..."
+# NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID = "..."
+# NEXT_PUBLIC_FIREBASE_APP_ID = "..."
+# NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID = "..."
+# OPENAI_API_KEY = "..."
+# GEMINI_API_KEY = "..."
+# AUTH_JWT_SECRET = "..."
+# VERCEL_ACCESS_TOKEN = "..."
+
+# Railway specific settings
+[railway]
+# Service name
+name = "com-psu-rizal-webapp"
+
+# Environment
+environment = "production"
+
+# Regions (optional - Railway will auto-select)
+# regions = ["us-west1"]
+
+# Build settings
+[railway.build]
+# Build timeout in seconds
+buildTimeout = 900
+
+# Maximum build size in MB
+maxBuildSize = 2048
+
+# Deployment settings
+[railway.deploy]
+# Number of replicas
+replicas = 1
+
+# Memory limit
+memory = "512MB"
+
+# CPU limit
+cpu = "0.5"
+
+# Health check settings
+[railway.healthcheck]
+# Health check path
+path = "/"
+
+# Health check interval in seconds
+interval = 30
+
+# Health check timeout in seconds
+timeout = 10
+
+# Number of retries before marking unhealthy
+retries = 3
+
+# Domains configuration
+[railway.domains]
+# Railway generated domain
+railwayDomain = "com-psu-rizal-production.up.railway.app"
+
+# Custom domain (optional - add your custom domain here)
+# customDomain = "your-custom-domain.com"

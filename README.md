@@ -634,7 +634,22 @@ After setting up Supabase, you can verify that everything is working correctly:
 
 ### Railway Deployment
 
-Deploy Supabase to Railway using the automated deployment script:
+The application is configured for Railway deployment with the following settings:
+
+**🚀 Live Deployment:**
+
+- **Domain**: https://com-psu-rizal-production.up.railway.app
+- **Port**: 3001
+- **Environment**: Production
+
+**📋 Deployment Configuration:**
+
+- Uses `railway.toml` for configuration as code
+- Builds from `apps/webapp` directory
+- Uses Nixpacks builder with Node.js 18+
+- Health checks configured for `/` endpoint
+
+**🚀 Quick Deploy:**
 
 1. **Install Railway CLI**:
 
@@ -644,22 +659,45 @@ Deploy Supabase to Railway using the automated deployment script:
    curl -fsSL https://railway.app/install.sh | sh
    ```
 
-2. **Set Railway Token**:
+2. **Login to Railway**:
 
    ```bash
-   export RAILWAY_TOKEN=0c275f51-45b5-4ee1-b78a-5e3fa62e624f
+   railway login
    ```
 
-3. **Deploy to Railway**:
+3. **Deploy using the script**:
 
    ```bash
-   npm run railway:deploy
+   ./deploy-railway.sh
    ```
 
-4. **Load Remote Users** (after deployment):
+4. **Or deploy manually**:
    ```bash
-   npm run supabase:load-users
+   railway deploy
    ```
+
+**🔧 Configuration Files:**
+
+- `railway.toml` - Main deployment configuration
+- `.railwayignore` - Files to exclude from deployment
+- `deploy-railway.sh` - Automated deployment script
+
+**🌐 Environment Variables:**
+Set these in your Railway dashboard or via CLI:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `NEXT_PUBLIC_FIREBASE_API_KEY`
+- `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
+- `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
+- And other secrets as needed
+
+**📊 Monitoring:**
+
+- Health checks every 30 seconds
+- Automatic scaling based on load
+- Real-time logs available via Railway dashboard
 
 ### Local Docker Development
 

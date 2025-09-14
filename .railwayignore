@@ -1,0 +1,117 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+dist/
+build/
+out/
+
+# Development files
+.env.local
+.env.development
+.env.test
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output/
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+
+# IDE files
+.cursor/
+.augment/
+.bevel/
+.kiro/
+.qoder/
+.qwen/
+.trae/
+
+# Framework examples and docs (not needed for deployment)
+frameworks/
+docs/
+externals/
+
+# Test files and configurations
+**/*.test.*
+**/*.spec.*
+jest.config.*
+cypress/
+
+# Docker files (if not using Docker deployment)
+Dockerfile*
+docker-compose*
+
+# CI/CD files
+.github/
+Jenkinsfile
+jenkins-cli.jar
+job-config.xml
+setup-jenkins-pipeline.sh
+
+# Scripts not needed for production
+scripts/
+init.sh
+setup-test-users.sh
+user-role-diagnostic.sh
+verify-users.sh
+gemini.sh
+
+# Database files
+*.sql
+supabase/migrations/
+
+# Capacitor and mobile builds
+capacitor/
+android/
+ios/
+
+# Desktop app
+apps/desktop/
+
+# Temporary files
+tmp/
+temp/
